@@ -1,0 +1,24 @@
+server:
+  port: 9527
+spring:
+  application:
+    name: AWM-zuul-9527
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:7001/eureka/
+  instance:
+    instance-id: zuul9527 # 修改eureka上的默认描述信息
+    prefer-ip-address: true
+# 路由网关配置
+zuul:
+  routes:
+    AWMUserServer:
+      serviceId: AWM-CONSUMER-USER-FEIGN-9002
+      path: /CONSUMERUSER/**
+    AWMMachineServer:
+      serviceId: AWM-CONSUMER-MACHINE-9001
+      path: /CONSUMERMACHINE/**
+  # 不能再使用这个路径访问了，ignore : 忽略 | “*” 隐藏全部的微服务真实路径
+  ignored-services: "*"
+  prefix: /AWM # 公共设置的前缀
