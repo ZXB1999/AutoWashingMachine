@@ -15,4 +15,8 @@ public class MachineServiceImpl implements MachineService {
     public List<Machine> queryAll() {
         return machineMapper.queryAll();
     }
+
+    public Machine quaryMachineByID(String id) {
+        return machineMapper.quaryMachineByID(id);
+    }
 }

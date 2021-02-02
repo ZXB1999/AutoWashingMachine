@@ -8,4 +8,7 @@
        select * from washingmachine
     </select>
 
+    <select id="quaryMachineByID" parameterType="String" resultType="machine">
+        select * from washingmachine where machine_id = #{id}
+    </select>
 </mapper>

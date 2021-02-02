@@ -163,6 +163,7 @@
         <module>AWM-eurekas</module>
         <module>AWM-consumer</module>
         <module>AWM-zuul</module>
+        <module>AWM-utils</module>
     </modules>
 
     <build>

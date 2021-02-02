@@ -13,6 +13,10 @@ public class MachineClientServiceFallBackFactory implements FallbackFactory {
             public List<Machine> queryUserById() {
                 return (List<Machine>) new java.awt.List();
             }
+
+            public Machine querybyid(String id) {
+                return new Machine().setBrand("服务降级");
+            }
         };
     }
 }

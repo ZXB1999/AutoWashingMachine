@@ -3,6 +3,7 @@ package com.ttmy.awm.controller;
 import com.ttmy.awm.api.Service.MachineClientService;
 import com.ttmy.awm.api.pojo.Machine;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
@@ -27,5 +28,10 @@ public class MachineConsumerController {
     public List<Machine> list(){
 //        return restTemplate.getForObject(REST_URL_PREFIX + "/Machine/queryAll/list", List.class);
         return machineClientService.queryUserById();
+    }
+
+    @RequestMapping("/consumer/Machine/findbyid/{id}")
+    public Machine findbyid(@PathVariable("id") String id){
+        return machineClientService.querybyid(id);
     }
 }

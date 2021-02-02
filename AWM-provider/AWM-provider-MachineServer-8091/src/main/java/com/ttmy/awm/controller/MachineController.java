@@ -4,6 +4,7 @@ import com.ttmy.awm.api.pojo.Machine;
 import com.ttmy.awm.service.MachineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,4 +20,10 @@ public class MachineController {
     public List<Machine> queryAll() {
         return machineService.queryAll();
     }
+
+    @GetMapping("/querybyid/{id}")
+    public Machine querybyid(@PathVariable("id") String id){
+        return machineService.quaryMachineByID(id);
+    }
+
 }

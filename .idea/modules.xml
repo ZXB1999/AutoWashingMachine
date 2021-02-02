@@ -16,6 +16,7 @@
       <module fileurl="file://$PROJECT_DIR$/AWM-provider/AWM-provider-MachineServer-8091/AWM-provider-MachineServer-8091.iml" filepath="$PROJECT_DIR$/AWM-provider/AWM-provider-MachineServer-8091/AWM-provider-MachineServer-8091.iml" />
       <module fileurl="file://$PROJECT_DIR$/AWM-provider/AWM-provider-UserServer-8092/AWM-provider-UserServer-8092.iml" filepath="$PROJECT_DIR$/AWM-provider/AWM-provider-UserServer-8092/AWM-provider-UserServer-8092.iml" />
       <module fileurl="file://$PROJECT_DIR$/AWM-provider/AWM-provider-common/AWM-provider-common.iml" filepath="$PROJECT_DIR$/AWM-provider/AWM-provider-common/AWM-provider-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AWM-utils/AWM-utils.iml" filepath="$PROJECT_DIR$/AWM-utils/AWM-utils.iml" />
       <module fileurl="file://$PROJECT_DIR$/AWM-zuul/AWM-zuul.iml" filepath="$PROJECT_DIR$/AWM-zuul/AWM-zuul.iml" />
       <module fileurl="file://$PROJECT_DIR$/AWM-zuul/AWM-zuul-9527/AWM-zuul-9527.iml" filepath="$PROJECT_DIR$/AWM-zuul/AWM-zuul-9527/AWM-zuul-9527.iml" />
       <module fileurl="file://$PROJECT_DIR$/AutoWashingMachine.iml" filepath="$PROJECT_DIR$/AutoWashingMachine.iml" />
