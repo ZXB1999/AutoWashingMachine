@@ -12,12 +12,6 @@
     <artifactId>AWM-api-User</artifactId>
 
     <dependencies>
-        <!--feign-->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-feign</artifactId>
-            <version>1.4.6.RELEASE</version>
-        </dependency>
         <dependency>
             <groupId>com.ttmy</groupId>
             <artifactId>AWM-api-common</artifactId>

@@ -8,6 +8,7 @@
     </option>
     <option name="ignoredFiles">
       <set>
+        <option value="$PROJECT_DIR$/AWM-provider/AWM-provider-mail-8093/pom.xml" />
         <option value="$PROJECT_DIR$/AWM-utils/AWM-QRcodeBuilder/pom.xml" />
       </set>
     </option>

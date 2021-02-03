@@ -12,37 +12,26 @@
     <artifactId>AWM-zuul-9527</artifactId>
 
     <dependencies>
-        <!--zuul-->
-        <!--erueka-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-zuul</artifactId>
-            <version>1.4.6.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-eureka</artifactId>
-            <version>1.4.6.RELEASE</version>
         </dependency>
-        <!--Hystrix-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-hystrix</artifactId>
-            <version>1.4.6.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-hystrix-dashboard</artifactId>
-            <version>1.4.6.RELEASE</version>
         </dependency>
-        <!--Ribbon-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-ribbon</artifactId>
-            <version>1.4.6.RELEASE</version>
         </dependency>
-
-        <!--实体类+web-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>

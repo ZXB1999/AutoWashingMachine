@@ -1,11 +1,12 @@
 package com.ttmy.awm.dao;
 
-import com.ttmy.awm.api.pojo.User;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.ttmy.awm.api.pojo.Awmuser;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 @Mapper
 @Repository
-public interface UserMapper {
-    User queryUserById(String UserId);
+public interface UserMapper extends BaseMapper<Awmuser> {
+
 }

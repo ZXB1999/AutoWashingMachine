@@ -1,12 +1,10 @@
 package com.ttmy.awm.service;
 
-import com.ttmy.awm.api.pojo.Machine;
-import org.apache.ibatis.annotations.Param;
 
+
+import com.ttmy.awm.api.pojo.Washingmachine;
 import java.util.List;
 
 public interface MachineService {
-    List<Machine> queryAll();
-
-    Machine quaryMachineByID(String id);
+    List<Washingmachine> queryAll();
 }

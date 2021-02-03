@@ -4,8 +4,6 @@ server:
 # mybatis配置
 mybatis:
   type-aliases-package: com.ttmy.awm.api.pojo
-  config-location: classpath:mybatis/mybatis-config.xml
-  mapper-locations: classpath:mybatis/mapper/*.xml
 
 # spring配置
 spring:

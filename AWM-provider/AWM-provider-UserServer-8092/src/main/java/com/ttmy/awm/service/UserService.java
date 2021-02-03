@@ -1,7 +1,11 @@
 package com.ttmy.awm.service;
 
-import com.ttmy.awm.api.pojo.User;
+import com.ttmy.awm.api.pojo.Awmuser;
+
+import java.util.List;
 
 public interface UserService {
-    User queryUserById(String UserId);
+    List<Awmuser> queryUserById(String UserId);
+
+    int insertNewUser(Awmuser newuser);
 }

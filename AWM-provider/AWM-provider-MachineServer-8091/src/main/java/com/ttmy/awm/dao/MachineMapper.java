@@ -1,16 +1,14 @@
 package com.ttmy.awm.dao;
 
-import com.ttmy.awm.api.pojo.Machine;
+
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.ttmy.awm.api.pojo.Washingmachine;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
 
 @Mapper
 @Repository
-public interface MachineMapper {
-    List<Machine> queryAll();
+public interface MachineMapper extends BaseMapper<Washingmachine> {
 
-    Machine quaryMachineByID(@Param("id") String id);
 }

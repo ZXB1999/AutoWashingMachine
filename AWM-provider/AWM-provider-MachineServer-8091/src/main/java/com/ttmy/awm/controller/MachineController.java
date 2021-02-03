@@ -1,6 +1,7 @@
 package com.ttmy.awm.controller;
 
-import com.ttmy.awm.api.pojo.Machine;
+
+import com.ttmy.awm.api.pojo.Washingmachine;
 import com.ttmy.awm.service.MachineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,13 +18,8 @@ public class MachineController {
     private MachineService machineService;
 
     @GetMapping("/queryAll/list")
-    public List<Machine> queryAll() {
+    public List<Washingmachine> queryAll() {
         return machineService.queryAll();
-    }
-
-    @GetMapping("/querybyid/{id}")
-    public Machine querybyid(@PathVariable("id") String id){
-        return machineService.quaryMachineByID(id);
     }
 
 }

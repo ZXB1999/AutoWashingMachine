@@ -1,6 +1,7 @@
 package com.ttmy.awm.api.Service;
 
-import com.ttmy.awm.api.pojo.Machine;
+
+import com.ttmy.awm.api.pojo.Washingmachine;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,8 +13,8 @@ import java.util.List;
 @FeignClient(value = "AWM-PROVIDER-MACHINESERVER-8091",fallbackFactory = MachineClientServiceFallBackFactory.class)
 public interface MachineClientService {
     @GetMapping("/Machine/queryAll/list")
-    List<Machine> queryUserById();
+    List<Washingmachine> queryUserById();
 
     @GetMapping("/Machine/querybyid/{id}")
-    Machine querybyid(@PathVariable("id") String id);
+    Washingmachine querybyid(@PathVariable("id") String id);
 }

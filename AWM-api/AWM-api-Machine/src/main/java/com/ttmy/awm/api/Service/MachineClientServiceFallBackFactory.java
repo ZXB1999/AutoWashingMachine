@@ -1,6 +1,7 @@
 package com.ttmy.awm.api.Service;
 
-import com.ttmy.awm.api.pojo.Machine;
+
+import com.ttmy.awm.api.pojo.Washingmachine;
 import feign.hystrix.FallbackFactory;
 import org.springframework.stereotype.Component;
 
@@ -10,12 +11,12 @@ import java.util.List;
 public class MachineClientServiceFallBackFactory implements FallbackFactory {
     public MachineClientService create(Throwable throwable) {
         return new MachineClientService() {
-            public List<Machine> queryUserById() {
-                return (List<Machine>) new java.awt.List();
+            public List<Washingmachine> queryUserById() {
+                return (List<Washingmachine>) new java.awt.List();
             }
 
-            public Machine querybyid(String id) {
-                return new Machine().setBrand("服务降级");
+            public Washingmachine querybyid(String id) {
+                return new Washingmachine().setBrand("服务降级");
             }
         };
     }

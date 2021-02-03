@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: AWM-consumer-User-feign-9002
+    name: AWM-consumer-Awmuser-feign-9002
 
 # 开启降级 feign.histrix
 feign:
