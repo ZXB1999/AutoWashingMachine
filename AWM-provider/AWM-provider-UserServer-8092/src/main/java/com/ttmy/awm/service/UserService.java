@@ -8,4 +8,6 @@ public interface UserService {
     List<Awmuser> queryUserById(String UserId);
 
     int insertNewUser(Awmuser newuser);
+
+    boolean checkUser(Awmuser newuser);
 }

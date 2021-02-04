@@ -15,13 +15,37 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
 
+    /**
+     * 根据账号查询用户
+     * @param UserId
+     * @return
+     */
     public List<Awmuser> queryUserById(String UserId) {
         Map<String,Object> a = new HashMap();
         a.put("awmuser_id",UserId);
         return userMapper.selectByMap(a);
     }
 
+    /**
+     * 新增用户（注册）
+     * @param newuser
+     * @return
+     */
     public int insertNewUser(Awmuser newuser){
         return userMapper.insert(newuser);
     }
+
+    /**
+     * 账号密码验证
+     * @param newuser
+     * @return
+     */
+    public boolean checkUser(Awmuser newuser) {
+        Map<String,Object> a = new HashMap();
+        a.put("awmusername",newuser.getAwmusername());
+        a.put("password",newuser.getPassword());
+        return !userMapper.selectByMap(a).isEmpty();
+    }
+
+
 }

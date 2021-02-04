@@ -5,6 +5,7 @@ server:
 mybatis:
   type-aliases-package: com.ttmy.awm.api.pojo
 
+
 # spring配置
 spring:
   application:
