@@ -2,6 +2,7 @@ package com.ttmy.awm.controller;
 
 import com.ttmy.awm.api.pojo.Awmuser;
 import com.ttmy.awm.service.UserService;
+import com.ttmy.awm.constant.LoginMsg;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -32,11 +33,13 @@ public class UserController {
     @ApiOperation("用户登陆验证")
     @PostMapping("/login")
     public Map<String,String> login(@RequestBody Awmuser newuser){
+        Map<String, String> map = new HashMap<String, String>();
         if(userService.checkUser(newuser)){
-            Map<String, String> map = new HashMap<String, String>();
             map.put("token",UUID.randomUUID().toString().replaceAll("-",""));
+            map.put("username",newuser.getAwmusername());
             return map;
         }
-        return null;
+        map.put("msg",LoginMsg.LOGIN_FAILED);
+        return map;
     }
 }

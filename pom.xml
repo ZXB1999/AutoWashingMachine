@@ -36,6 +36,10 @@
         <spring-cloud-starter-eureka.version>1.4.6.RELEASE</spring-cloud-starter-eureka.version>
         <spring-boot-maven-plugin.version>2.3.0.RELEASE</spring-boot-maven-plugin.version>
         <spring-boot-starter-mail.version>2.4.2</spring-boot-starter-mail.version>
+        <spring-security-version>2.3.7.RELEASE</spring-security-version>
+        <spring-boot-starter-data-redis.version>2.3.4.RELEASE</spring-boot-starter-data-redis.version>
+        <spring-security-oauth2.version>2.5.0.RELEASE</spring-security-oauth2.version>
+        <spring-security-jwt.version>1.0.2.RELEASE</spring-security-jwt.version>
     </properties>
 
     <!-- 依赖声明 -->
@@ -130,7 +134,7 @@
                 <version>${commons.fileupload.version}</version>
             </dependency>
 
-            <!-- JSON 解析器和生成器 -->
+            <!--fastjson JSON 解析器和生成器 -->
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>fastjson</artifactId>
@@ -205,6 +209,35 @@
                 <version>${spring-boot-starter-mail.version}</version>
             </dependency>
 
+            <!-- spring-security -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-security</artifactId>
+                <version>${spring-security-version}</version>
+            </dependency>
+
+            <!--redis-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-redis</artifactId>
+                <version>${spring-boot-starter-data-redis.version}</version>
+            </dependency>
+
+            <!--oauth2-->
+            <dependency>
+                <groupId>org.springframework.security.oauth</groupId>
+                <artifactId>spring-security-oauth2</artifactId>
+                <version>${spring-security-oauth2.version}</version>
+            </dependency>
+
+            <!--jwt-->
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-jwt</artifactId>
+                <version>${spring-security-jwt.version}</version>
+            </dependency>
+
+
         </dependencies>
     </dependencyManagement>
 
@@ -214,7 +247,6 @@
         <module>AWM-eurekas</module>
         <module>AWM-consumer</module>
         <module>AWM-zuul</module>
-        <module>AWM-utils</module>
     </modules>
 
     <build>

@@ -3,23 +3,14 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>AutoWashingMachine</artifactId>
+        <artifactId>AWM-api</artifactId>
         <groupId>com.ttmy</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>AWM-api</artifactId>
-    <packaging>pom</packaging>
+    <artifactId>AWM-api-constant</artifactId>
+    <packaging>jar</packaging>
 
-    <description>
-        AWM-系统接口
-    </description>
-    <modules>
-        <module>AWM-api-Machine</module>
-        <module>AWM-api-User</module>
-        <module>AWM-api-common</module>
-        <module>AWM-api-constant</module>
-    </modules>
 
 </project>
