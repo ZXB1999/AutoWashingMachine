@@ -155,7 +155,7 @@
                 <version>${jackson-annotations.version}</version>
             </dependency>
 
-            <!--德鲁伊数据源-->
+            <!--druid数据源-->
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>druid</artifactId>

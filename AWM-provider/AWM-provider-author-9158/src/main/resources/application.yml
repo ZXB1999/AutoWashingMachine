@@ -10,6 +10,11 @@ spring:
     url: jdbc:mysql://127.0.0.1:3306/awmusers?userSSL=true&useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
     username: root
     password: system
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    database: 0
+    timeout: 1800000
 # Eureka的配置,服务注册到哪里
 eureka:
   client:
@@ -18,7 +23,3 @@ eureka:
   instance:
     instance-id: AuthorServer-9158 # 修改eureka上的默认描述信息
     prefer-ip-address: true
-# info配置
-info:
-  app.name: AutoWashingMachine
-  company.name: DSDcompany-TTMY
