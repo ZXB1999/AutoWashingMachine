@@ -3,6 +3,17 @@ server:
 spring:
   application:
     name: AWM-zuul-9527
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/awmusers?userSSL=true&useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: system
+  redis:
+      host: 127.0.0.1
+      port: 6379
+      database: 0
+      timeout: 1800000
 eureka:
   client:
     service-url:

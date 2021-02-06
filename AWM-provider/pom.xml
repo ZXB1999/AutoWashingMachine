@@ -19,5 +19,6 @@
         <module>AWM-provider-MachineServer-8091</module>
         <module>AWM-provider-UserServer-8092</module>
         <module>AWM-provider-common</module>
+        <module>AWM-provider-common-security</module>
     </modules>
 </project>

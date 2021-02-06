@@ -55,18 +55,18 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
                                                                     // 隐藏式（implicit）？？？？
                                                                      //密码式（password）需要发送用户名密码
                                                                     // 客户端凭证（client credentials） 无需发送
-                .scopes("all") //生效范围
+                .scopes("all") //生效范围、客户端范围，名称自定义，必填*/
                 .authorities("ADMIN") //client 的权限,  不能为null.  强调一下这不是用户的权限(角色) , 这是client自己的属性
-                .secret("scma_app") //密文？加密依据？密钥？
+                .secret("scma_app") //密码,要保密
                 .accessTokenValiditySeconds(ACCESS_TOKEN_TIMER) //有效时间
                 .refreshTokenValiditySeconds(REFRESH_TOKEN_TIMER) ;//刷新时间
     }
 
-    //绑定令牌
+    //绑定令牌 授权服务器端点配置
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
 //        endpoints.accessTokenConverter(accessTokenConverter());//转换token格式
-        endpoints.tokenStore(tokenStore()).authenticationManager(authenticationManager);
+        endpoints.tokenStore(tokenStore()).authenticationManager(authenticationManager);//这里将token存入redis
     }
 
     @Override
@@ -112,6 +112,10 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
         return accessTokenConverter;
     }
 
+    /**
+     * 存入redis的bean
+     * @return
+     */
     @Bean
     public TokenStore tokenStore() {
         RedisTokenStore tokenStore = new RedisTokenStore(redisConnectionFactory);
