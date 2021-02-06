@@ -3,6 +3,10 @@ package com.ttmy.awm.config;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+/**
+ * 密码加密？？？
+ *
+ */
 @Component
 public class MyPasswordEncoder implements PasswordEncoder{
 

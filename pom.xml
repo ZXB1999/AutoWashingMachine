@@ -247,6 +247,7 @@
         <module>AWM-eurekas</module>
         <module>AWM-consumer</module>
         <module>AWM-zuul</module>
+        <module>AWM-authors</module>
     </modules>
 
     <build>
