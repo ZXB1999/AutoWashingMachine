@@ -3,26 +3,24 @@ package com.ttmy.awm.filter;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.oauth2.provider.OAuth2Authentication;
-import org.springframework.security.oauth2.provider.OAuth2Request;
+import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
+/**
+ * 第二层（zuul路由拦截）
+ * 做单点登陆，验证token合法性
+ */
+@Component
 public class AuthFilter extends ZuulFilter {
-
-    @Override
-    public boolean shouldFilter() {
-        return true;
-    }
-
     @Override
     public String filterType() {
+        /**
+         * pre：路由之前
+         * routing：路由之时
+         * post： 路由之后
+         * error：发送错误调用
+         */
+
         return "pre";
     }
 
@@ -32,35 +30,26 @@ public class AuthFilter extends ZuulFilter {
     }
 
     @Override
+    public boolean shouldFilter() {
+        //使过滤器生效
+        return true;
+    }
+
+    /**
+     * 校验token合法性的主要方法
+     * @return
+     * @throws ZuulException
+     */
+    @Override
     public Object run() throws ZuulException {
-        RequestContext ctx = RequestContext.getCurrentContext();
-        //从安全上下文中拿 到用户身份对象
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (!(authentication instanceof OAuth2Authentication)) {
+        RequestContext requestContext = RequestContext.getCurrentContext();
+        if (!requestContext.getRequest().getHeaderNames().nextElement().equals("authorization")){
+            requestContext.setSendZuulResponse(false);  //false  不会继续往下执行 不会调用服务接口了 网关直接响应给客户了
+            requestContext.setResponseBody("You have no token!!!");
+            requestContext.setResponseStatusCode(401);
             return null;
         }
-        OAuth2Authentication oAuth2Authentication = (OAuth2Authentication) authentication;
-        Authentication userAuthentication = oAuth2Authentication.getUserAuthentication();
-        //取出用户身份信息
-        String principal = userAuthentication.getName();
-
-        //取出用户权限
-        List<String> authorities = new ArrayList<>();
-        //从userAuthentication取出权限，放在authorities
-        userAuthentication.getAuthorities().stream().forEach(c -> authorities.add(((GrantedAuthority) c).getAuthority()));
-
-        OAuth2Request oAuth2Request = oAuth2Authentication.getOAuth2Request();
-        Map<String, String> requestParameters = oAuth2Request.getRequestParameters();
-        Map<String, Object> jsonToken = new HashMap<>(requestParameters);
-        if (userAuthentication != null) {
-            jsonToken.put("principal", principal);
-            jsonToken.put("authorities", authorities);
-        }
-
-        //把身份信息和权限信息放在json中，加入http的header中,转发给微服务
-//        ctx.addZuulRequestHeader("json-token", EncryptUtil.encodeUTF8StringBase64(JSON.toJSONString(jsonToken)));
-        ctx.addZuulRequestHeader("json-token", "身份权限信息");
-
+//        System.out.println("接到了令牌-->"+requestContext.getRequest().getHeader("authorization"));
         return null;
     }
 }

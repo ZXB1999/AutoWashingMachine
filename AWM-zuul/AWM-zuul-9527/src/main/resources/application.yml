@@ -23,13 +23,13 @@ eureka:
     prefer-ip-address: true
 # 路由网关配置
 zuul:
+  prefix: /AWM # 公共设置的前缀
+  ignored-services: "*"
   routes:
     AWMUserServer:
-      serviceId: AWM-CONSUMER-USER-FEIGN-9002
       path: /CONSUMERUSER/**
+      serviceId: AWM-CONSUMER-USER-FEIGN-9002
     AWMMachineServer:
-      serviceId: AWM-CONSUMER-MACHINE-9001
       path: /CONSUMERMACHINE/**
+      serviceId: AWM-CONSUMER-MACHINE-9001
   # 不能再使用这个路径访问了，ignore : 忽略 | “*” 隐藏全部的微服务真实路径
-  ignored-services: "*"
-  prefix: /AWM # 公共设置的前缀
