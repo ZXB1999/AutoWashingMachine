@@ -12,7 +12,7 @@
     <artifactId>AWM-authors</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>AWM-authors-authorcunter_9158</module>
+        <module>AWM-authors-authorcenter_9158</module>
     </modules>
 
 

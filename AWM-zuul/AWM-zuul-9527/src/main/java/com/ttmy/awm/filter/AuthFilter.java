@@ -35,7 +35,7 @@ public class AuthFilter extends ZuulFilter {
         return true;
     }
 
-    /**
+    /**先走oauth的校验再走拦截
      * 校验token合法性的主要方法
      * @return
      * @throws ZuulException

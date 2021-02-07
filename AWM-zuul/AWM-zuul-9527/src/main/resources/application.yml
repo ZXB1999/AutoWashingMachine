@@ -27,9 +27,9 @@ zuul:
   ignored-services: "*"
   routes:
     AWMUserServer:
-      path: /CONSUMERUSER/**
-      serviceId: AWM-CONSUMER-USER-FEIGN-9002
+      path: /PROVIDERUSER/**
+      serviceId: AWM-PROVIDER-USERSERVER-8092
     AWMMachineServer:
-      path: /CONSUMERMACHINE/**
-      serviceId: AWM-CONSUMER-MACHINE-9001
+      path: /PROVIDERMACHINE/**
+      serviceId: AWM-PROVIDER-MACHINESERVER-8091
   # 不能再使用这个路径访问了，ignore : 忽略 | “*” 隐藏全部的微服务真实路径

@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/Machine")
 public class MachineController {
     @Autowired
     private MachineService machineService;
