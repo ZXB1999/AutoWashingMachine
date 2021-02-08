@@ -6,5 +6,9 @@ import com.ttmy.awm.api.pojo.Washingmachine;
 import java.util.List;
 
 public interface MachineService {
+
     List<Washingmachine> queryAll();
+
+    Washingmachine findMachineById(String machineId);
+
 }

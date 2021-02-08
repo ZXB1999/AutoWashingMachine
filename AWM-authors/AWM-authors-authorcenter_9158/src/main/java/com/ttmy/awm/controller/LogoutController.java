@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
+import java.util.Map;
 
 
 @RestController
@@ -16,10 +18,15 @@ public class LogoutController {
 
     @ApiOperation("登出并删除token")
     @GetMapping("/oauth/Logout/{accesstoken}")
-    public String revokeToken(@PathVariable("accesstoken") String accesstoken) {
+    public Map<String,String> revokeToken(@PathVariable("accesstoken") String accesstoken) {
+        Map<String,String> map = new HashMap<String, String>();
         if (consumerTokenServices.revokeToken(accesstoken)){
-            return "退出登录";
+            map.put("msg","success");
+            return map;
+        }else {
+            map.put("msg","You are not recorded");
+            return map;
         }
-        return "您还没有登陆";
+
     }
 }

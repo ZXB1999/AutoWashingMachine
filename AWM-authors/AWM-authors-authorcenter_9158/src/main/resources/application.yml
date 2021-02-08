@@ -2,10 +2,6 @@ server:
   port: 9158
 # spring配置
 spring:
-  security:
-    user:
-      name: user
-      password: system
   application:
     name: AWM-provider-author-9158
   datasource:

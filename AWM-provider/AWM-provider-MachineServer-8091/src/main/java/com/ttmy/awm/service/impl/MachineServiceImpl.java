@@ -13,8 +13,16 @@ public class MachineServiceImpl implements MachineService {
     @Autowired
     private MachineMapper machineMapper;
 
+    /**
+     * 查询所有机器
+     * @return
+     */
     public List<Washingmachine> queryAll() {
         return machineMapper.selectList(null);
+    }
+
+    public Washingmachine findMachineById(String machineId) {
+        return machineMapper.selectById(machineId);
     }
 
 }
