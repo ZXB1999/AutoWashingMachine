@@ -16,6 +16,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     //http拦截
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        http.csrf().disable();//关闭CSRF（Cross-site request forgery跨站请求伪造），解开post等方法
+        //另一种方法  https://blog.csdn.net/sinat_28454173/article/details/52251004
         http.formLogin() // 表单登录。跳转到security默认的登录表单页
                 .and()
                 .authorizeRequests() // 对请求授权
