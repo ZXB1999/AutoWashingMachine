@@ -5,9 +5,7 @@ import com.ttmy.awm.service.LoginService;
 import com.ttmy.awm.service.RegisterService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -34,4 +32,14 @@ public class RegisterController {
         map.put("msg","注册成功");
         return map;
     }
+
+    @ApiOperation("检查用户是否存在")
+    @GetMapping("/oauth/userisExist/{username}")
+    public Boolean userisExist(@PathVariable("username") String username) {
+        if(loginService.qutyByname(username)!=null){
+            return true;
+        }
+        return false;
+    }
+
 }
