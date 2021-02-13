@@ -24,8 +24,10 @@ public class RegisterController {
         if(loginService.qutyByname(user.getAwmusername())!=null){
             map.put("msg","该用户已经存在");
             return map;
-        }
-        if (registerService.registerUser(user)!=1){
+        }else if(user.getAwmusername()==""||user.getAwmusername()==null||user.getPassword()==""||user.getPassword()==null){
+            map.put("msg","用户名或密码为空");
+            return map;
+        }else if (registerService.registerUser(user)!=1){
             map.put("msg","注册失败");
             return map;
         }

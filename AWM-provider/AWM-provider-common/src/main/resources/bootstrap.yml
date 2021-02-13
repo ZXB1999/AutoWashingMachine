@@ -1,3 +1,4 @@
+#sql日志总开关
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
