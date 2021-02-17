@@ -26,8 +26,8 @@ import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
  * 权限服务器核心配置
  */
 public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
-    // 资源ID，可定义在数据库
-    private static final String SOURCE_ID = "scmaSecurity";
+    private static final String SOURCE_ID = "scmaSecurity";// 资源ID，可定义在数据库
+    private static final String SECRET = "TTMY-ZXB";// 资源ID，可定义在数据库
     private static final int ACCESS_TOKEN_TIMER = 60 * 60 * 24;
     private static final int REFRESH_TOKEN_TIMER = 60 * 60 * 24 * 30;
 
@@ -59,8 +59,8 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.inMemory()//内存模式，将来可以改为基于数据库判定
-                .withClient("myapp")//客户端id，对应的是请求参数“client_id”
-                .secret("scma_app") //客户端密钥，与客户端id一起，校验客户端合法性
+                .withClient("AWM_client")//客户端id，对应的是请求参数“client_id”
+                .secret(SECRET) //客户端密钥，与客户端id一起，校验客户端合法性
                 .resourceIds(SOURCE_ID)//可以访问的资源列表，可访问那些资源呢
                 .authorizedGrantTypes("password","client_credentials","refresh_token","authorization_code")//认证的模式，授权码（authorization-code）需要客户端获取许可码再发送给认证服务器
                                                                     // 隐藏式（implicit）？？？？
@@ -68,7 +68,7 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
                                                                     // 客户端凭证（client credentials） 无需发送
                 .scopes("all") //生效范围、客户端范围，名称自定义，必填*/
                 .authorities("ADMIN") //client 的权限,  不能为null.  强调一下这不是用户的权限(角色) , 这是client自己的属性
-                .redirectUris("http://www.baidu.com")//回调地址
+                //.redirectUris("http://www.baidu.com")//回调地址
                 ;
     }
     /**令牌怎么发放，怎么存储

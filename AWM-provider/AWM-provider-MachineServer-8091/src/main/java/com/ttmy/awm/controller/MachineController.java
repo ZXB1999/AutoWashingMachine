@@ -2,6 +2,7 @@ package com.ttmy.awm.controller;
 
 
 import com.ttmy.awm.api.pojo.Washingmachine;
+import com.ttmy.awm.api.pojo.vo.MachineStateVo;
 import com.ttmy.awm.service.MachineService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,12 @@ public class MachineController {
     @GetMapping("/ById/{id}")
     public Washingmachine queryById(@PathVariable("id") String machineId) {
         return machineService.findMachineById(machineId);
+    }
+
+    @ApiOperation("按ID(扫描二维码)查询机器")
+    @GetMapping("/ByState/{id}")
+    public List<MachineStateVo> queryByMachineState(@PathVariable("id") String machineId) {
+        return machineService.queryMachineState(machineId);
     }
 
 
