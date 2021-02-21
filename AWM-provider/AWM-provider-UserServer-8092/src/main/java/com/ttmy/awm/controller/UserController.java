@@ -17,10 +17,10 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @ApiOperation("创建新用户")
-    @PostMapping("/insert/newuser")
-    public int insertnewUser(@RequestBody Awmuser newuser){
-        return userService.insertNewUser(newuser);
+    @ApiOperation("验证支付密码")
+    @PostMapping("/examine")
+    public Boolean examinePaypwd(@RequestBody Awmuser newuser){
+        return userService.examinePaypwd(newuser);
     }
 
 }

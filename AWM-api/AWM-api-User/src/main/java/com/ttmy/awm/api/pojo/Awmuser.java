@@ -18,4 +18,5 @@ public class Awmuser extends BaseEntity {
     private String awmname;
     private String awmusername;
     private String password;
+    private String paypwd;
 }
