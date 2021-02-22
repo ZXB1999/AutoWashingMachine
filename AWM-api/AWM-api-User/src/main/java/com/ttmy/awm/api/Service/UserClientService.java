@@ -9,6 +9,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 @Component
 @FeignClient(value = "AWM-PROVIDER-USERSERVER-8092",fallbackFactory = UserClientServiceFallBackFactory.class)
 public interface UserClientService {
-    @GetMapping("/User/queryUserById/{UserId}")
-    Awmuser queryUserById(@PathVariable("UserId") String id);
+    @GetMapping("/queryUserByName/{UserName}")
+    Awmuser queryUserById(@PathVariable("UserName") String name);
 }

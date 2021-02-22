@@ -12,8 +12,8 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @EnableDiscoveryClient //服务发现
 @MapperScan("com.ttmy.awm.dao")
 @EnableFeignClients(basePackages = {"com.ttmy.awm.api"})
-public class MachineProvider_8091 {
+public class OrderProvider_8093 {
     public static void main(String[] args) {
-        SpringApplication.run(MachineProvider_8091.class,args);
+        SpringApplication.run(OrderProvider_8093.class,args);
     }
 }

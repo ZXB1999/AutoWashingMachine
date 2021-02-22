@@ -20,5 +20,6 @@
         <module>AWM-provider-UserServer-8092</module>
         <module>AWM-provider-common</module>
         <module>AWM-provider-common-security</module>
+        <module>AWM-provider-OrderServer-8093</module>
     </modules>
 </project>

@@ -2,10 +2,13 @@ package com.ttmy.awm.api.Service;
 
 
 import com.ttmy.awm.api.pojo.Washingmachine;
+import com.ttmy.awm.api.pojo.Washingserver;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -17,4 +20,7 @@ public interface MachineClientService {
 
     @GetMapping("/Machine/querybyid/{id}")
     Washingmachine querybyid(@PathVariable("id") String id);
+
+    @PostMapping("/UpdateState")
+    int updatestatus(@RequestBody Washingserver newstate);
 }

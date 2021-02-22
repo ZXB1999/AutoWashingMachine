@@ -3,6 +3,7 @@ package com.ttmy.awm.service;
 
 
 import com.ttmy.awm.api.pojo.Washingmachine;
+import com.ttmy.awm.api.pojo.Washingserver;
 import com.ttmy.awm.api.pojo.vo.MachineStateVo;
 
 import java.util.List;
@@ -14,5 +15,7 @@ public interface MachineService {
     Washingmachine findMachineById(String machineId);
 
     List<MachineStateVo> queryMachineState(String machineId);
+
+    int updatestatus(Washingserver newstate);
 
 }

@@ -23,4 +23,10 @@ public class UserController {
         return userService.examinePaypwd(newuser);
     }
 
+    @ApiOperation("获取用户唯一id")
+    @GetMapping("/queryUserByName/{UserId}")
+    public Awmuser queryUserByName(@PathVariable("UserId") String name){
+        return userService.queryUserByName(name);
+    }
+
 }

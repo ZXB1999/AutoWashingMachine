@@ -25,4 +25,10 @@ public class UserServiceImpl implements UserService {
         }
         return false;
     }
+
+    public Awmuser queryUserByName(String username) {
+        QueryWrapper<Awmuser> wrapper = new QueryWrapper();
+        wrapper.in("awmusername",username);
+        return userMapper.selectOne(wrapper);
+    }
 }

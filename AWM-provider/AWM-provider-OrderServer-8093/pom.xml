@@ -9,16 +9,11 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>AWM-provider-MachineServer-8091</artifactId>
+    <artifactId>AWM-provider-OrderServer-8093</artifactId>
     <packaging>jar</packaging>
 
     <dependencies>
         <!--指向自己写的实体类-->
-        <dependency>
-            <groupId>com.ttmy</groupId>
-            <artifactId>AWM-api-Machine</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
         <dependency>
             <groupId>com.ttmy</groupId>
             <artifactId>AWM-api-Order</artifactId>
@@ -27,6 +22,11 @@
         <dependency>
             <groupId>com.ttmy</groupId>
             <artifactId>AWM-api-User</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.ttmy</groupId>
+            <artifactId>AWM-api-Machine</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
@@ -41,7 +41,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.ttmy.awm.MachineProvider_8091</mainClass>
+                    <mainClass>com.ttmy.awm.OrderProvider_8093</mainClass>
                 </configuration>
                 <executions>
                     <execution>
@@ -53,4 +53,6 @@
             </plugin>
         </plugins>
     </build>
+
+
 </project>
