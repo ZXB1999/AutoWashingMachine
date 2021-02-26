@@ -4,6 +4,7 @@ import com.ttmy.awm.api.Service.MachineClientService;
 import com.ttmy.awm.api.pojo.Awmorder;
 import com.ttmy.awm.api.pojo.Washingserver;
 import com.ttmy.awm.service.OrderService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,6 +17,7 @@ public class OrderController {
     @Autowired
     private MachineClientService machineClientService;
 
+    @ApiOperation("创建订单")
     @PostMapping("/creatneworder")
     public void creatneworder (@RequestBody Awmorder neworder){
         if(orderService.creatorder(neworder)>0) {

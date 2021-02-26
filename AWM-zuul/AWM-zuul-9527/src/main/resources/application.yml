@@ -32,4 +32,7 @@ zuul:
     AWMMachineServer:
       path: /PROVIDERMACHINE/**
       serviceId: AWM-PROVIDER-MACHINESERVER-8091
+    AWMOrderServer:
+      path: /PROVIDERORDER/**
+      serviceId: AWM-PROVIDER-ORDERSERVER-8093
   # 不能再使用这个路径访问了，ignore : 忽略 | “*” 隐藏全部的微服务真实路径

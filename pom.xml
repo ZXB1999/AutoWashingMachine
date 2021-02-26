@@ -40,6 +40,7 @@
         <spring-boot-starter-data-redis.version>2.3.4.RELEASE</spring-boot-starter-data-redis.version>
         <spring-security-oauth2.version>2.5.0.RELEASE</spring-security-oauth2.version>
         <spring-security-jwt.version>1.0.2.RELEASE</spring-security-jwt.version>
+        <springfox-swagger2.version>2.9.2</springfox-swagger2.version>
     </properties>
 
     <!-- 依赖声明 -->
@@ -118,6 +119,16 @@
                 <groupId>io.swagger</groupId>
                 <artifactId>swagger-annotations</artifactId>
                 <version>${swagger.core.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>${springfox-swagger2.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger-ui</artifactId>
+                <version>${springfox-swagger2.version}</version>
             </dependency>
 
             <!-- io常用工具类 -->
