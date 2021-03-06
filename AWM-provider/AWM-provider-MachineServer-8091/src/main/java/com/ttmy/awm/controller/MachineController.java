@@ -61,6 +61,7 @@ public class MachineController {
             neworder.setCreateTime(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(map.get("creattime")));
             neworder.setStartTime(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(map.get("starttime")));
             neworder.setCustomerId(userClientService.queryUserById(map.get("awmuser")).getAwmuserId());
+            neworder.setOrderState("1");
             /**
              * 把map里的东西丢到order对象，用fegin传过去
              */

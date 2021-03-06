@@ -25,4 +25,5 @@ public class Awmorder extends BaseEntity {
     private String machineId;
     private String serverlevel;
     private Date startTime;
+    private String orderState;
 }
