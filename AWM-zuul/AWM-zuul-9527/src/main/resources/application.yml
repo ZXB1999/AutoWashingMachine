@@ -36,3 +36,16 @@ zuul:
       path: /PROVIDERORDER/**
       serviceId: AWM-PROVIDER-ORDERSERVER-8093
   # 不能再使用这个路径访问了，ignore : 忽略 | “*” 隐藏全部的微服务真实路径
+  host:
+    connect-timeout-millis: 60000
+    socket-timeout-millis: 60000
+ribbon:
+  ReadTimeout: 60000
+  ConnectTimeout: 60000
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000

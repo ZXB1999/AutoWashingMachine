@@ -1,15 +1,14 @@
 package com.ttmy.awm.controller;
 
 import com.ttmy.awm.api.Service.MachineClientService;
+import com.ttmy.awm.api.Service.UserClientService;
 import com.ttmy.awm.api.pojo.Awmorder;
+import com.ttmy.awm.api.pojo.Awmuser;
 import com.ttmy.awm.api.pojo.Washingserver;
 import com.ttmy.awm.service.OrderService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,6 +18,8 @@ public class OrderController {
     private OrderService orderService;
     @Autowired
     private MachineClientService machineClientService;
+    @Autowired
+    private UserClientService userClientService;
 
     @ApiOperation("创建订单")
     @PostMapping("/creatneworder")
@@ -38,8 +39,8 @@ public class OrderController {
     }
 
     @ApiOperation("当前订单")
-    @GetMapping("/useingOrder")
-    public List<Awmorder> useingOrder(){
-        return orderService.usingorder();
+    @GetMapping("/useingOrder/{userid}")
+    public List<Awmorder> useingOrder(@PathVariable("userid") String userid){
+        return orderService.usingorder(userClientService.queryUserById(userid).getAwmuserId());
     }
 }

@@ -6,7 +6,7 @@ import com.ttmy.awm.dao.OrderMapper;
 import com.ttmy.awm.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import com.ttmy.awm.constant.OrderState;
 import java.util.List;
 
 @Service
@@ -17,9 +17,10 @@ public class OrderserviceImpl implements OrderService {
         return orderMapper.insert(neworder);
     }
 
-    public List<Awmorder> usingorder() {
+    public List<Awmorder> usingorder(String customerid) {
         QueryWrapper<Awmorder> wrapper = new QueryWrapper();
-        wrapper.in("order_state","1");
+        wrapper.in("order_state",OrderState.USING_ORDER);
+        wrapper.in("customer_id",customerid);
         return orderMapper.selectList(wrapper);
     }
 }

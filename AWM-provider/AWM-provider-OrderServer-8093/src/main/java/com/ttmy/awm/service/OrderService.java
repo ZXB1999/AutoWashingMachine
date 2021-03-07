@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface OrderService {
     int creatorder (Awmorder neworder);
-    List<Awmorder> usingorder ();
+    List<Awmorder> usingorder (String customerid);
 }

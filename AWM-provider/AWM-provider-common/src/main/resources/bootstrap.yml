@@ -2,3 +2,7 @@
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+ribbon:
+  eager-load:
+    enabled: true
+    clients: MachineServer-8091,UserServer-8092,OrderServer-8093

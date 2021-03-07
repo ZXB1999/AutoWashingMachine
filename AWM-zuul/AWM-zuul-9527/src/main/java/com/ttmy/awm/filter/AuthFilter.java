@@ -49,9 +49,7 @@ public class AuthFilter extends ZuulFilter {
         Enumeration<String> headerNames = requestContext.getRequest().getHeaderNames();
         while (headerNames.hasMoreElements()){
             String header = headerNames.nextElement();//调用nextElement方法获得元素
-            System.out.print(header);
-            if(header.equals("authorization")){
-                //找到令牌，放行
+            if(header.equals("authorization")){//找到令牌，放行
                 return null;
             }
         }
