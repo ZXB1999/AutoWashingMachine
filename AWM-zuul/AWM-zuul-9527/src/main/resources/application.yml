@@ -23,8 +23,15 @@ eureka:
     prefer-ip-address: true
 # 路由网关配置
 zuul:
+  host:
+    connect-timeout-millis: 3000 #ms HTTP连接超时要比Hystrix的大
+    socket-timeout-millis: 3000  #ms socket通信超时
+  #饥饿加载
+  ribbon:
+    eager-load:
+      enabled: true
   prefix: /AWM # 公共设置的前缀
-  ignored-services: "*"
+  ignored-services: "*"# 不能再使用这个路径访问了，ignore : 忽略 | “*” 隐藏全部的微服务真实路径
   routes:
     AWMUserServer:
       path: /PROVIDERUSER/**
@@ -35,17 +42,13 @@ zuul:
     AWMOrderServer:
       path: /PROVIDERORDER/**
       serviceId: AWM-PROVIDER-ORDERSERVER-8093
-  # 不能再使用这个路径访问了，ignore : 忽略 | “*” 隐藏全部的微服务真实路径
-  host:
-    connect-timeout-millis: 60000
-    socket-timeout-millis: 60000
 ribbon:
-  ReadTimeout: 60000
-  ConnectTimeout: 60000
+  ReadTimeout: 3000
+  ConnectTimeout: 3000
 hystrix:
   command:
     default:
-      execution:
-        isolation:
-          thread:
-            timeoutInMilliseconds: 60000
+    execution:
+    isolation:
+    thread:
+    timeoutInMilliseconds: 3000 # 设置hystrix的超时时间为1000ms

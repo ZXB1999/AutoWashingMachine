@@ -2,6 +2,10 @@ server:
   port: 9158
 # spring配置
 spring:
+  #项目启动初始化DispatcherServlet
+#  mvc:
+#    servlet:
+#      load-on-startup: 100
   application:
     name: AWM-provider-author-9158
   datasource:

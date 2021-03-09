@@ -1,7 +1,13 @@
+spring:
+  #项目启动初始化DispatcherServlet
+  mvc:
+    servlet:
+      load-on-startup: 100
 #sql日志总开关
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#项目启动初始化ribbonclient
 ribbon:
   eager-load:
     enabled: true

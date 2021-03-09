@@ -256,7 +256,6 @@
         <module>AWM-api</module>
         <module>AWM-provider</module>
         <module>AWM-eurekas</module>
-        <module>AWM-consumer</module>
         <module>AWM-zuul</module>
         <module>AWM-authors</module>
     </modules>

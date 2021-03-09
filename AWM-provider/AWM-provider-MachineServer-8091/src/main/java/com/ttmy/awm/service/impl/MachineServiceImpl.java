@@ -11,10 +11,12 @@ import com.ttmy.awm.dao.WashingServerMapper;
 import com.ttmy.awm.service.MachineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class MachineServiceImpl implements MachineService {
     @Autowired
     private MachineMapper machineMapper;
@@ -41,6 +43,11 @@ public class MachineServiceImpl implements MachineService {
         return machineStateMapper.queryMachineState(machineId);
     }
 
+    /**
+     * 更新设备状态
+     * @param newstate
+     * @return
+     */
     public int updatestatus(Washingserver newstate) {
         QueryWrapper<Washingserver> wrapper = new QueryWrapper();
         wrapper.in("machine_id",newstate.getMachineId());

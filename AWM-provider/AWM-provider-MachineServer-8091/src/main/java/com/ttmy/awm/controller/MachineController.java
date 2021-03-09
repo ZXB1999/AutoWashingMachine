@@ -4,11 +4,12 @@ package com.ttmy.awm.controller;
 import com.ttmy.awm.api.Service.OrderClientService;
 import com.ttmy.awm.api.Service.UserClientService;
 import com.ttmy.awm.api.pojo.Awmorder;
-import com.ttmy.awm.api.pojo.Awmuser;
 import com.ttmy.awm.api.pojo.Washingmachine;
 import com.ttmy.awm.api.pojo.Washingserver;
 import com.ttmy.awm.api.pojo.vo.MachineStateVo;
+import com.ttmy.awm.constant.OrderState;
 import com.ttmy.awm.service.MachineService;
+import com.ttmy.awm.service.MachineTaskService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +29,9 @@ public class MachineController {
 
     @Autowired
     private UserClientService userClientService;
+
+    @Autowired
+    private MachineTaskService machineTaskService;
 
 
     @ApiOperation("查询所有机器")
@@ -50,23 +54,20 @@ public class MachineController {
 
     @ApiOperation("创建新订单")
     @PostMapping("/creatorder")
-    public void creatorder(@RequestBody HashMap<String,String> map) throws ParseException {
+    public void creatorder(@RequestBody HashMap<String,String> map) throws ParseException, InterruptedException {
         if (map==null){
-            System.out.println("未获取到订单信息");
+            //System.out.println("未获取到订单信息");
             return;
-        }else {
+        } else {
             Awmorder neworder = new Awmorder();
             neworder.setMachineId(map.get("machineId"));
             neworder.setServerlevel(map.get("serverlevel"));
             neworder.setCreateTime(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(map.get("creattime")));
             neworder.setStartTime(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(map.get("starttime")));
             neworder.setCustomerId(userClientService.queryUserById(map.get("awmuser")).getAwmuserId());
-            neworder.setOrderState("1");
-            /**
-             * 把map里的东西丢到order对象，用fegin传过去
-             */
-
-            orderClientService.creatneworder(neworder);
+            neworder.setOrderState(OrderState.USING_ORDER);
+            orderClientService.creatneworder(neworder);//把map里的东西丢到order对象，用fegin传过去
+            machineTaskService.startProduction(neworder);//异步任务，后台计算时间，时间结束改变订单状态
         }
     }
 
@@ -75,4 +76,5 @@ public class MachineController {
     public int updatestatus(@RequestBody Washingserver newstate) {
         return machineService.updatestatus(newstate);
     }
+
 }

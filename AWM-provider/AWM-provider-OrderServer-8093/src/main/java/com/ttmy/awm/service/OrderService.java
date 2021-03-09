@@ -7,4 +7,6 @@ import java.util.List;
 public interface OrderService {
     int creatorder (Awmorder neworder);
     List<Awmorder> usingorder (String customerid);
+    List<Awmorder> historyorder (String customerid);
+    int updateorderstate(Awmorder neworder);
 }
