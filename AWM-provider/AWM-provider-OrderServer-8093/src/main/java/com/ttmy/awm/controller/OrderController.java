@@ -1,5 +1,6 @@
 package com.ttmy.awm.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.ttmy.awm.api.Service.MachineClientService;
 import com.ttmy.awm.api.Service.UserClientService;
 import com.ttmy.awm.api.pojo.Awmorder;
@@ -22,6 +23,10 @@ public class OrderController {
     @Autowired
     private UserClientService userClientService;
 
+    /**
+     * 创建订单并改变设备状态
+     * @param neworder
+     */
     @ApiOperation("创建订单")
     @PostMapping("/creatneworder")
     public synchronized void creatneworder (@RequestBody Awmorder neworder){
@@ -30,14 +35,12 @@ public class OrderController {
             newstate.setMachineId(neworder.getMachineId());
             newstate.setState(MachineState.MACHINE_USEING);
             machineClientService.updatestatus(newstate);
-            //System.out.println("订单成功创建，开启定时器，并改变设备状态");
-            //订单成功创建，开启定时器，并改变设备状态
         }
     }
 
     @ApiOperation("当前订单")
     @GetMapping("/useingOrder/{userid}")
-    public List<Awmorder> useingOrder(@PathVariable("userid") String userid){
+    public List<Awmorder> useingOrder(@PathVariable("userid") String userid) throws JsonProcessingException {
         return orderService.usingorder(userClientService.queryUserById(userid).getAwmuserId());
     }
 

@@ -1,7 +1,7 @@
 package com.ttmy.awm.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.ttmy.awm.api.pojo.Awmuser;
+import com.ttmy.awm.constant.*;
 import com.ttmy.awm.api.pojo.Washingmachine;
 import com.ttmy.awm.api.pojo.Washingserver;
 import com.ttmy.awm.api.pojo.vo.MachineStateVo;
@@ -32,13 +32,23 @@ public class MachineServiceImpl implements MachineService {
      * @return
      */
     public List<Washingmachine> queryAll() {
-        return machineMapper.selectList(null);
+        QueryWrapper<Washingmachine> wrapper = new QueryWrapper();
+        wrapper.in("delflag",BaceConst.DELFLAG_USEFUL);
+        return machineMapper.selectList(wrapper);
     }
 
     public Washingmachine findMachineById(String machineId) {
-        return machineMapper.selectById(machineId);
+        QueryWrapper<Washingmachine> wrapper = new QueryWrapper();
+        wrapper.in("machine_id",machineId);
+        wrapper.in("delflag",BaceConst.DELFLAG_USEFUL);
+        return machineMapper.selectOne(wrapper);
     }
 
+    /**
+     * 根据设备ID查找机器
+     * @param machineId
+     * @return
+     */
     public List<MachineStateVo> queryMachineState(String machineId) {
         return machineStateMapper.queryMachineState(machineId);
     }

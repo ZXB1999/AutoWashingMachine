@@ -1,11 +1,13 @@
 package com.ttmy.awm.service.Impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ttmy.awm.api.pojo.Awmorder;
 import com.ttmy.awm.dao.OrderMapper;
 import com.ttmy.awm.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Async;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import com.ttmy.awm.constant.OrderState;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +19,14 @@ import java.util.List;
 public class OrderserviceImpl implements OrderService {
     @Autowired
     private OrderMapper orderMapper;
+    @Autowired
+    private RedisTemplate<String, String> redisTemplate;
+
+    /**
+     * 创建订单
+     * @param neworder
+     * @return
+     */
     public int creatorder(Awmorder neworder) {
         return orderMapper.insert(neworder);
     }
@@ -26,11 +36,12 @@ public class OrderserviceImpl implements OrderService {
      * @param customerid
      * @return
      */
-    public List<Awmorder> usingorder(String customerid) {
+    public List<Awmorder> usingorder(String customerid){
         QueryWrapper<Awmorder> wrapper = new QueryWrapper();
         wrapper.in("order_state",OrderState.USING_ORDER);
         wrapper.in("customer_id",customerid);
-        return orderMapper.selectList(wrapper);
+        List<Awmorder> list = orderMapper.selectList(wrapper);
+        return list;
     }
 
     /**
