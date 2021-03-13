@@ -10,4 +10,5 @@ public interface OrderService {
     List<Awmorder> usingorder (String customerid) throws JsonProcessingException;
     List<Awmorder> historyorder (String customerid);
     int updateorderstate(Awmorder neworder);
+    List<Awmorder> allOrder ();
 }

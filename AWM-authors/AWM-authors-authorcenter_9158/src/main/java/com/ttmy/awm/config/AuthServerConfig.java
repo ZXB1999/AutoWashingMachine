@@ -27,7 +27,8 @@ import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
  */
 public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
     private static final String SOURCE_ID = "scmaSecurity";// 资源ID，可定义在数据库
-    private static final String SECRET = "TTMY-ZXB";// 资源ID，可定义在数据库
+    private static final String SECRET = "TTMY-ZXB";// 客户端密钥，可定义在数据库
+    private static final String ADMIN_SECRET = "TTMY-ADMIN";// 客户端密钥，可定义在数据库
     private static final int ACCESS_TOKEN_TIMER = 60 * 60 * 24;
     private static final int REFRESH_TOKEN_TIMER = 60 * 60 * 24 * 30;
 
@@ -67,8 +68,15 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
                                                                      //密码式（password）需要发送用户名密码
                                                                     // 客户端凭证（client credentials） 无需发送
                 .scopes("all") //生效范围、客户端范围，名称自定义，必填*/
-                .authorities("ADMIN") //client 的权限,  不能为null.  强调一下这不是用户的权限(角色) , 这是client自己的属性
+                .authorities("CLIENT") //client 的权限,  不能为null.  强调一下这不是用户的权限(角色) , 这是client自己的属性
                 //.redirectUris("http://www.baidu.com")//回调地址
+                .and()
+                .withClient("AWM_admin")
+                .secret(ADMIN_SECRET)
+                .resourceIds(SOURCE_ID)
+                .authorizedGrantTypes("password","client_credentials","refresh_token","authorization_code")
+                .scopes("all")
+                .authorities("ADMIN")
                 ;
     }
     /**令牌怎么发放，怎么存储

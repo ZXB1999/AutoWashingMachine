@@ -8,4 +8,6 @@ public interface UserService {
     Boolean examinePaypwd(Awmuser newuser);
 
     Awmuser queryUserByName(String username);
+
+    List<Awmuser> findallUser();
 }

@@ -55,4 +55,10 @@ public class OrderController {
     public int changeorderstate(@RequestBody Awmorder neworder){
         return orderService.updateorderstate(neworder);
     }
+
+    @ApiOperation("查询全部订单(ADMIN)")
+    @GetMapping("/allOrder")
+    public List<Awmorder> allOrder(){
+        return orderService.allOrder();
+    }
 }

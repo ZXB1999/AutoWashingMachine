@@ -67,4 +67,12 @@ public class OrderserviceImpl implements OrderService {
         wrapper.in("customer_id",changeorder.getCustomerId());
         return orderMapper.update(changeorder,wrapper);
     }
+
+    /**
+     * 管理员查询全部订单
+     * @return
+     */
+    public List<Awmorder> allOrder() {
+        return orderMapper.selectList(null);
+    }
 }

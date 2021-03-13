@@ -33,4 +33,8 @@ public class UserServiceImpl implements UserService {
         wrapper.in("awmusername",username);
         return userMapper.selectOne(wrapper);
     }
+
+    public List<Awmuser> findallUser() {
+        return userMapper.selectList(null);
+    }
 }

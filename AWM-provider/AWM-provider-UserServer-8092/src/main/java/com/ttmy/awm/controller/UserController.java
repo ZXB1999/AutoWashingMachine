@@ -29,4 +29,10 @@ public class UserController {
         return userService.queryUserByName(name);
     }
 
+    @ApiOperation("查询所有用户(ADMIN)")
+    @GetMapping("/findallUser")
+    public List<Awmuser> findallUser(){
+        return userService.findallUser();
+    }
+
 }
