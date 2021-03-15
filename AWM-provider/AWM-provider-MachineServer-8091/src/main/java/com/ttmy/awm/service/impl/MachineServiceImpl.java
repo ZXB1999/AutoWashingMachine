@@ -1,6 +1,11 @@
 package com.ttmy.awm.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.ttmy.awm.api.pojo.Awmuser;
+import com.ttmy.awm.api.pojo.vo.MachinePageVo;
+import com.ttmy.awm.api.pojo.vo.UserPageVo;
 import com.ttmy.awm.constant.*;
 import com.ttmy.awm.api.pojo.Washingmachine;
 import com.ttmy.awm.api.pojo.Washingserver;
@@ -62,6 +67,21 @@ public class MachineServiceImpl implements MachineService {
         QueryWrapper<Washingserver> wrapper = new QueryWrapper();
         wrapper.in("machine_id",newstate.getMachineId());
         return washingServerMapper.update(newstate,wrapper);
+    }
+
+    public List<Washingmachine> queryAllMachine(Integer current, Integer size) {
+        MachinePageVo machinePageVo = new MachinePageVo();
+        IPage<Washingmachine> page = new Page<Washingmachine>(current, size);
+        machineMapper.selectPage(page, null);
+        machinePageVo.setCurrent(current);
+        machinePageVo.setSize(size);
+        machinePageVo.setTotal(page.getTotal());
+        machinePageVo.setWashingmachineList(page.getRecords());
+        return machinePageVo.getWashingmachineList();
+    }
+
+    public int countmachine() {
+        return machineMapper.selectCount(null);
     }
 
 }

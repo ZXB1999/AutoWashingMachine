@@ -1,9 +1,14 @@
 package com.ttmy.awm.service.Impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ttmy.awm.api.pojo.Awmorder;
+import com.ttmy.awm.api.pojo.Awmuser;
+import com.ttmy.awm.api.pojo.vo.OrderPageVo;
+import com.ttmy.awm.api.pojo.vo.UserPageVo;
 import com.ttmy.awm.dao.OrderMapper;
 import com.ttmy.awm.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,7 +77,18 @@ public class OrderserviceImpl implements OrderService {
      * 管理员查询全部订单
      * @return
      */
-    public List<Awmorder> allOrder() {
-        return orderMapper.selectList(null);
+    public List<Awmorder> allOrder(Integer current, Integer size) {
+        OrderPageVo orderVo = new OrderPageVo();
+        IPage<Awmorder> page = new Page<Awmorder>(current, size);
+        orderMapper.selectPage(page, null);
+        orderVo.setCurrent(current);
+        orderVo.setSize(size);
+        orderVo.setTotal(page.getTotal());
+        orderVo.setAwmorderList(page.getRecords());
+        return orderVo.getAwmorderList();
+    }
+
+    public int countorder() {
+        return orderMapper.selectCount(null);
     }
 }

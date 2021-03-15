@@ -30,9 +30,14 @@ public class UserController {
     }
 
     @ApiOperation("查询所有用户(ADMIN)")
-    @GetMapping("/findallUser")
-    public List<Awmuser> findallUser(){
-        return userService.findallUser();
+    @GetMapping("/findallUser/{current}/{size}")
+    public List<Awmuser> findallUser(@PathVariable("current") int current,@PathVariable("size") int size){
+        return userService.findallUser(current,size);
     }
 
+    @ApiOperation("查询总条数(ADMIN)")
+    @GetMapping("/countuser")
+    public int countuser(){
+        return userService.countuser();
+    }
 }

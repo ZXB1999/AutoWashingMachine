@@ -77,4 +77,16 @@ public class MachineController {
         return machineService.updatestatus(newstate);
     }
 
+    @ApiOperation("查询所有机器(ADMIN)")
+    @GetMapping("/queryAllMachine/{current}/{size}")
+    public List<Washingmachine> queryAllMachine(@PathVariable("current") int current,@PathVariable("size") int size) {
+        return machineService.queryAllMachine(current,size);
+    }
+
+    @ApiOperation("查询总条数(ADMIN)")
+    @GetMapping("/countmachine")
+    public int countmachine(){
+        return machineService.countmachine();
+    }
+
 }

@@ -9,5 +9,7 @@ public interface UserService {
 
     Awmuser queryUserByName(String username);
 
-    List<Awmuser> findallUser();
+    List<Awmuser> findallUser(Integer current, Integer size);
+
+    int countuser();
 }

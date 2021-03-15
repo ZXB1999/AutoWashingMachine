@@ -1,7 +1,10 @@
 package com.ttmy.awm.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.ttmy.awm.api.pojo.Awmuser;
+import com.ttmy.awm.api.pojo.vo.UserPageVo;
 import com.ttmy.awm.dao.UserMapper;
 import com.ttmy.awm.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +37,18 @@ public class UserServiceImpl implements UserService {
         return userMapper.selectOne(wrapper);
     }
 
-    public List<Awmuser> findallUser() {
-        return userMapper.selectList(null);
+    public List<Awmuser> findallUser(Integer current, Integer size) {
+        UserPageVo userVo = new UserPageVo();
+        IPage<Awmuser> page = new Page<Awmuser>(current, size);
+        userMapper.selectPage(page, null);
+        userVo.setCurrent(current);
+        userVo.setSize(size);
+        userVo.setTotal(page.getTotal());
+        userVo.setAwmuserList(page.getRecords());
+        return userVo.getAwmuserList();
+    }
+
+    public int countuser() {
+        return userMapper.selectCount(null);
     }
 }

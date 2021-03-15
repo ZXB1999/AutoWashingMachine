@@ -44,7 +44,7 @@ public class OrderController {
         return orderService.usingorder(userClientService.queryUserById(userid).getAwmuserId());
     }
 
-    @ApiOperation("当前订单")
+    @ApiOperation("历史订单")
     @GetMapping("/historyOrder/{userid}")
     public List<Awmorder> historyOrder(@PathVariable("userid") String userid){
         return orderService.historyorder(userClientService.queryUserById(userid).getAwmuserId());
@@ -57,8 +57,14 @@ public class OrderController {
     }
 
     @ApiOperation("查询全部订单(ADMIN)")
-    @GetMapping("/allOrder")
-    public List<Awmorder> allOrder(){
-        return orderService.allOrder();
+    @GetMapping("/allOrder/{current}/{size}")
+    public List<Awmorder> allOrder(@PathVariable("current") int current,@PathVariable("size") int size){
+        return orderService.allOrder(current,size);
+    }
+
+    @ApiOperation("查询总条数(ADMIN)")
+    @GetMapping("/countorder")
+    public int countorder(){
+        return orderService.countorder();
     }
 }

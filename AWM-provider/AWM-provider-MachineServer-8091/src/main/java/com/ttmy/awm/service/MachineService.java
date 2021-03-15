@@ -18,4 +18,7 @@ public interface MachineService {
 
     int updatestatus(Washingserver newstate);
 
+    List<Washingmachine> queryAllMachine(Integer current, Integer size);
+
+    int countmachine();
 }

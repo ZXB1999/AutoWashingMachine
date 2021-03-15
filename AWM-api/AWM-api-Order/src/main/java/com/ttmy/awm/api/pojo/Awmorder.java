@@ -2,6 +2,7 @@ package com.ttmy.awm.api.pojo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.ttmy.awm.api.Entity.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,6 +25,7 @@ public class Awmorder extends BaseEntity {
     private String customerId;
     private String machineId;
     private String serverlevel;
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Date startTime;
     private String orderState;
 }
