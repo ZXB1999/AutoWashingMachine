@@ -10,6 +10,7 @@ import com.ttmy.awm.api.pojo.vo.MachineStateVo;
 import com.ttmy.awm.constant.OrderState;
 import com.ttmy.awm.service.MachineService;
 import com.ttmy.awm.service.MachineTaskService;
+import com.ttmy.awm.service.QRcodeService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -33,6 +34,8 @@ public class MachineController {
     @Autowired
     private MachineTaskService machineTaskService;
 
+    @Autowired
+    private QRcodeService qRcodeService;
 
     @ApiOperation("查询所有机器")
     @GetMapping("/queryAll/list")
@@ -87,6 +90,12 @@ public class MachineController {
     @GetMapping("/countmachine")
     public int countmachine(){
         return machineService.countmachine();
+    }
+
+    @ApiOperation("查询设备二维码(ADMIN)")
+    @GetMapping("/machineQRcode/{MachineID}")
+    public byte[] machineQRcode(@PathVariable("MachineID") String MachineID) throws Exception {
+        return qRcodeService.QRcode(MachineID);
     }
 
 }
