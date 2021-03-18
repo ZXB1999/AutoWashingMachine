@@ -98,4 +98,9 @@ public class MachineController {
         return qRcodeService.QRcode(MachineID);
     }
 
+    @ApiOperation("创建新设备(ADMIN)")
+    @PostMapping("/creatnewMachine")
+    public int creatnewMachine(@RequestBody Washingmachine newMachine) {
+        return machineService.creatnewMachine(newMachine);
+    }
 }

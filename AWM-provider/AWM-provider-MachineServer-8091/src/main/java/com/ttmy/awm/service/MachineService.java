@@ -21,4 +21,6 @@ public interface MachineService {
     List<Washingmachine> queryAllMachine(Integer current, Integer size);
 
     int countmachine();
+
+    int creatnewMachine(Washingmachine newMachine);
 }

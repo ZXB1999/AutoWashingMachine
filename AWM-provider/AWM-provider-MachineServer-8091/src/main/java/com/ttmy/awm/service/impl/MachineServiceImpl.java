@@ -82,4 +82,21 @@ public class MachineServiceImpl implements MachineService {
         return machineMapper.selectCount(null);
     }
 
+    /**
+     * @admin
+     * @param newMachine
+     * @return
+     */
+    public int creatnewMachine(Washingmachine newMachine) {
+
+        if(machineMapper.insert(newMachine)!=0){
+            Washingserver newstate = new Washingserver();
+            newstate.setMachineId(newMachine.getMachineId());
+            newstate.setState("0");
+            newstate.setServer(newMachine.getType());
+            return washingServerMapper.insert(newstate);
+        }
+        return 0;
+    }
+
 }
