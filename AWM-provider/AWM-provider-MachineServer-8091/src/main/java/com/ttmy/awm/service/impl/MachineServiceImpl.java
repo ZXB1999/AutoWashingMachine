@@ -67,6 +67,12 @@ public class MachineServiceImpl implements MachineService {
         return washingServerMapper.update(newstate,wrapper);
     }
 
+    /**
+     * 分页查询设备
+     * @param current
+     * @param size
+     * @return
+     */
     public List<Washingmachine> queryAllMachine(Integer current, Integer size) {
         MachinePageVo machinePageVo = new MachinePageVo();
         IPage<Washingmachine> page = new Page<Washingmachine>(current, size);
@@ -83,6 +89,7 @@ public class MachineServiceImpl implements MachineService {
     }
 
     /**
+     * 创建新订单
      * @admin
      * @param newMachine
      * @return
@@ -97,6 +104,32 @@ public class MachineServiceImpl implements MachineService {
             return washingServerMapper.insert(newstate);
         }
         return 0;
+    }
+
+    /**
+     * 按设备id或品牌查询设备
+     * @param MachineId
+     * @param Brand
+     * @param current
+     * @param size
+     * @return
+     */
+    public List<Washingmachine> queryMachine(String MachineId, String Brand, Integer current, Integer size) {
+        QueryWrapper<Washingmachine> wrapper = new QueryWrapper();
+        MachinePageVo machinePageVo = new MachinePageVo();
+        IPage<Washingmachine> page = new Page<Washingmachine>(current, size);
+        if (MachineId!=null&&MachineId!=""){
+            wrapper.in("machine_id",MachineId);
+        }
+        if (Brand!=null&&Brand!=""){
+            wrapper.in("brand",Brand);
+        }
+        machineMapper.selectPage(page, wrapper);
+        machinePageVo.setCurrent(current);
+        machinePageVo.setSize(size);
+        machinePageVo.setTotal(page.getTotal());
+        machinePageVo.setWashingmachineList(page.getRecords());
+        return machinePageVo.getWashingmachineList();
     }
 
 }

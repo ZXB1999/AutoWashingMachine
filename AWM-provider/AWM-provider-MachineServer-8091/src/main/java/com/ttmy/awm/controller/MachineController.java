@@ -103,4 +103,10 @@ public class MachineController {
     public int creatnewMachine(@RequestBody Washingmachine newMachine) {
         return machineService.creatnewMachine(newMachine);
     }
+
+    @ApiOperation("多条件查询某一设备(ADMIN)")
+    @PostMapping("/queryMachine/{current}/{size}")
+    public List<Washingmachine> queryMachine(@RequestBody Washingmachine newMachine,@PathVariable("current") int current,@PathVariable("size") int size) {
+        return machineService.queryMachine(newMachine.getMachineId(),newMachine.getBrand(),current,size);
+    }
 }

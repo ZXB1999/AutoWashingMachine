@@ -23,4 +23,6 @@ public interface MachineService {
     int countmachine();
 
     int creatnewMachine(Washingmachine newMachine);
+
+    List<Washingmachine> queryMachine(String MachineId,String Brand,Integer current, Integer size);
 }
