@@ -13,7 +13,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.OutputStream;
 import java.util.Hashtable;
-import java.util.Random;
 
 import javax.imageio.ImageIO;
 
@@ -121,41 +120,18 @@ public class QRCodeUtils {
      *            内容
      * @param imgPath
      *            LOGO地址
-     * @param destPath
-     *            存放目录
      * @param needCompress
      *            是否压缩LOGO
      * @throws Exception
      * @return
      */
-//    public static byte[] encode(String content, String imgPath, String destPath, boolean needCompress) throws Exception {
     public static byte[] encode(String content, String imgPath, boolean needCompress) throws Exception {
         BufferedImage image = QRCodeUtils.createImage(content, imgPath,
                 needCompress);
-//        mkdirs(destPath);
-        String file = new Random().nextInt(99999999)+".jpg";
-//        ImageIO.write(image, FORMAT_NAME, new File(destPath+"/"+file));
-
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         ImageIO.write(image,"JPG",out);
-//        System.out.println(out.toByteArray());
-
         return out.toByteArray();
-//        return file;
     }
-
-    /**
-     * 当文件夹不存在时，mkdirs会自动创建多层目录，区别于mkdir．(mkdir如果父目录不存在则会抛出异常)
-     * @date 2013-12-11 上午10:16:36
-     * @param destPath 存放目录
-     */
-//    public static void mkdirs(String destPath) {
-//        File file =new File(destPath);
-//        //当文件夹不存在时，mkdirs会自动创建多层目录，区别于mkdir．(mkdir如果父目录不存在则会抛出异常)
-//        if (!file.exists() && !file.isDirectory()) {
-//            file.mkdirs();
-//        }
-//    }
 
     /**
      * 生成二维码(内嵌LOGO)
@@ -164,14 +140,10 @@ public class QRCodeUtils {
      *            内容
      * @param imgPath
      *            LOGO地址
-     * @param destPath
-     *            存储地址
      * @throws Exception
      */
-//    public static void encode(String content, String imgPath, String destPath)
     public static void encode(String content, String imgPath)
             throws Exception {
-//        QRCodeUtils.encode(content, imgPath, destPath, false);
         QRCodeUtils.encode(content, imgPath, false);
     }
 
@@ -180,16 +152,12 @@ public class QRCodeUtils {
      *
      * @param content
      *            内容
-     * @param destPath
-     *            存储地址
      * @param needCompress
      *            是否压缩LOGO
      * @throws Exception
      */
-//    public static void encode(String content, String destPath,
     public static void encode(String content,
                               boolean needCompress) throws Exception {
-//        QRCodeUtils.encode(content, null, destPath, needCompress);
         QRCodeUtils.encode(content, null, needCompress);
     }
 
@@ -198,13 +166,9 @@ public class QRCodeUtils {
      *
      * @param content
      *            内容
-     * @param destPath
-     *            存储地址
      * @throws Exception
      */
-//    public static void encode(String content, String destPath) throws Exception {
     public static void encode(String content) throws Exception {
-//        QRCodeUtils.encode(content, null, destPath, false);
         QRCodeUtils.encode(content, null, false);
     }
 
@@ -226,11 +190,8 @@ public class QRCodeUtils {
         BufferedImage image = QRCodeUtils.createImage(content, imgPath,
                 needCompress);
         ImageIO.write(image, FORMAT_NAME, output);
-
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         ImageIO.write(image,"JPG",out);
-        System.out.println(out.toByteArray());
-
         return out.toByteArray();
     }
 
@@ -284,11 +245,4 @@ public class QRCodeUtils {
     public static String decode(String path) throws Exception {
         return QRCodeUtils.decode(new File(path));
     }
-
-//    public static void main(String[] args) throws Exception {
-//        String text = "7a80c7d8617511eba407509a4ccf4b2c";  //这里设置自定义网站url
-//        String logoPath = "C:\\Users\\TTMY\\Desktop\\毕业设计\\素材\\logo\\logo.png";
-//        String destPath = "src\\main\\resources\\QRcode";
-//        System.out.println(QRCodeUtils.encode(text, logoPath, destPath, true));
-//    }
 }

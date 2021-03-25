@@ -25,4 +25,6 @@ public interface MachineService {
     int creatnewMachine(Washingmachine newMachine);
 
     List<Washingmachine> queryMachine(String MachineId,String Brand,Integer current, Integer size);
+
+    int PseudodeleteMachine(String MachineId);
 }

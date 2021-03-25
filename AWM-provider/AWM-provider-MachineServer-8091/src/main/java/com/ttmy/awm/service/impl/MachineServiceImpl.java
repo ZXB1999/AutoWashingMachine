@@ -84,6 +84,10 @@ public class MachineServiceImpl implements MachineService {
         return machinePageVo.getWashingmachineList();
     }
 
+    /**
+     * 条数统计
+     * @return
+     */
     public int countmachine() {
         return machineMapper.selectCount(null);
     }
@@ -99,7 +103,7 @@ public class MachineServiceImpl implements MachineService {
         if(machineMapper.insert(newMachine)!=0){
             Washingserver newstate = new Washingserver();
             newstate.setMachineId(newMachine.getMachineId());
-            newstate.setState("0");
+            newstate.setState(MachineState.MACHINE_USEFUL);
             newstate.setServer(newMachine.getType());
             return washingServerMapper.insert(newstate);
         }
@@ -130,6 +134,18 @@ public class MachineServiceImpl implements MachineService {
         machinePageVo.setTotal(page.getTotal());
         machinePageVo.setWashingmachineList(page.getRecords());
         return machinePageVo.getWashingmachineList();
+    }
+
+    /**
+     * 伪删除设备
+     * @param MachineId
+     * @return
+     */
+    public int PseudodeleteMachine(String MachineId) {
+        Washingmachine Pseudodelete = new Washingmachine();
+        Pseudodelete.setMachineId(MachineId);
+        Pseudodelete.setDelflag(BaceConst.DELFLAG_UNUSEFUL);
+        return machineMapper.updateById(Pseudodelete);
     }
 
 }

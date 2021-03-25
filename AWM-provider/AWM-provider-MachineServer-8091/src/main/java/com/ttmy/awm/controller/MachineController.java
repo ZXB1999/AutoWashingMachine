@@ -109,4 +109,10 @@ public class MachineController {
     public List<Washingmachine> queryMachine(@RequestBody Washingmachine newMachine,@PathVariable("current") int current,@PathVariable("size") int size) {
         return machineService.queryMachine(newMachine.getMachineId(),newMachine.getBrand(),current,size);
     }
+
+    @ApiOperation("伪删除设备(ADMIN)")
+    @PostMapping("/PseudodeleteMachine/{machineID}")
+    public int PseudodeleteMachine(@PathVariable("machineID") String machineID) {
+        return machineService.PseudodeleteMachine(machineID);
+    }
 }
