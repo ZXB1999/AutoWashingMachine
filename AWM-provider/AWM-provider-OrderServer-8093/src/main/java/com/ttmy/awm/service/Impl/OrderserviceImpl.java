@@ -9,6 +9,7 @@ import com.ttmy.awm.api.pojo.Awmorder;
 import com.ttmy.awm.api.pojo.Awmuser;
 import com.ttmy.awm.api.pojo.vo.OrderPageVo;
 import com.ttmy.awm.api.pojo.vo.UserPageVo;
+import com.ttmy.awm.constant.BaceConst;
 import com.ttmy.awm.dao.OrderMapper;
 import com.ttmy.awm.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,7 +81,10 @@ public class OrderserviceImpl implements OrderService {
     public List<Awmorder> allOrder(Integer current, Integer size) {
         OrderPageVo orderVo = new OrderPageVo();
         IPage<Awmorder> page = new Page<Awmorder>(current, size);
-        orderMapper.selectPage(page, null);
+        QueryWrapper<Awmorder> wrapper = new QueryWrapper();
+        wrapper.in("delflag", BaceConst.DELFLAG_USEFUL);
+        wrapper.orderByDesc("create_time");
+        orderMapper.selectPage(page, wrapper);
         orderVo.setCurrent(current);
         orderVo.setSize(size);
         orderVo.setTotal(page.getTotal());

@@ -76,7 +76,10 @@ public class MachineServiceImpl implements MachineService {
     public List<Washingmachine> queryAllMachine(Integer current, Integer size) {
         MachinePageVo machinePageVo = new MachinePageVo();
         IPage<Washingmachine> page = new Page<Washingmachine>(current, size);
-        machineMapper.selectPage(page, null);
+        QueryWrapper<Washingmachine> wrapper = new QueryWrapper();
+        wrapper.in("delflag",BaceConst.DELFLAG_USEFUL);
+        wrapper.orderByDesc("create_time");
+        machineMapper.selectPage(page, wrapper);
         machinePageVo.setCurrent(current);
         machinePageVo.setSize(size);
         machinePageVo.setTotal(page.getTotal());
@@ -89,7 +92,9 @@ public class MachineServiceImpl implements MachineService {
      * @return
      */
     public int countmachine() {
-        return machineMapper.selectCount(null);
+        QueryWrapper<Washingmachine> wrapper = new QueryWrapper();
+        wrapper.in("delflag",BaceConst.DELFLAG_USEFUL);
+        return machineMapper.selectCount(wrapper);
     }
 
     /**
