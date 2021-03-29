@@ -8,6 +8,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
+import java.math.BigDecimal;
+
 /**
  * 设备持久化类
  */
@@ -21,4 +23,6 @@ public class Washingmachine extends BaseEntity {
     private String brand;
     private String model;
     private String type;
+    private BigDecimal longitude;
+    private BigDecimal latitude;
 }
