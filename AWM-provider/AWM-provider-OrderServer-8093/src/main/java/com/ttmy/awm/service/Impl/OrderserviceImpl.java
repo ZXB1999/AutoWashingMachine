@@ -3,30 +3,30 @@ package com.ttmy.awm.service.Impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ttmy.awm.api.Service.MachineClientService;
 import com.ttmy.awm.api.pojo.Awmorder;
-import com.ttmy.awm.api.pojo.Awmuser;
 import com.ttmy.awm.api.pojo.vo.OrderPageVo;
-import com.ttmy.awm.api.pojo.vo.UserPageVo;
 import com.ttmy.awm.constant.BaceConst;
 import com.ttmy.awm.dao.OrderMapper;
 import com.ttmy.awm.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import com.ttmy.awm.constant.OrderState;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Transactional
 public class OrderserviceImpl implements OrderService {
     @Autowired
     private OrderMapper orderMapper;
+
     @Autowired
-    private RedisTemplate<String, String> redisTemplate;
+    private MachineClientService machineClientService;
 
     /**
      * 创建订单
@@ -94,5 +94,67 @@ public class OrderserviceImpl implements OrderService {
 
     public int countorder() {
         return orderMapper.selectCount(null);
+    }
+
+    /**
+     * 统计每小时订单量
+     * @return
+     */
+    public Map<String,Integer> statisticalhour() {
+        int temporary=0;
+        Map<String,Integer> map = new HashMap<String, Integer>();
+        for (String hour: orderMapper.statisticalhour()) {
+            if(map.containsKey(hour)){
+                temporary = map.get(hour)+1;
+                map.remove(hour);
+                map.put(hour,temporary);
+            }else {
+                map.put(hour,new Integer(1));
+            }
+        }
+        return map;
+    }
+
+    /**
+     * 统计星期销售量
+     * @return
+     */
+    @Override
+    public Map<String, Integer> statisticalweek() {
+        int temporary=0;
+        Map<String,Integer> map = new HashMap<String, Integer>();
+        for (String week: orderMapper.statisticalweek()) {
+            if(map.containsKey(week)){
+                temporary = map.get(week)+1;
+                map.remove(week);
+                map.put(week,temporary);
+            }else {
+                map.put(week,new Integer(1));
+            }
+        }
+        return map;
+    }
+
+    /**
+     * 统计星期销售额
+     * @return
+     */
+    @Override
+    public Map<String, BigDecimal> statisticalsaleroom() {
+        BigDecimal temporary = new BigDecimal(0);
+        Map<String, BigDecimal> saleroom =new HashMap<String, BigDecimal>();
+        //拿到单价了
+        Map<String, BigDecimal> servercost = machineClientService.servercost();
+        List<Map<String, String>> statisticalsaleroom = orderMapper.statisticalsaleroom();
+        for (Map<String, String> map: statisticalsaleroom) {
+            if (saleroom.containsKey(map.get("DAYNAME(create_time)"))){
+                temporary = saleroom.get(map.get("DAYNAME(create_time)")).add(servercost.get(map.get("serverlevel")));
+                saleroom.remove(map.get("DAYNAME(create_time)"));
+                saleroom.put(map.get("DAYNAME(create_time)"),temporary);
+            }else {
+                saleroom.put(map.get("DAYNAME(create_time)"),servercost.get(map.get("serverlevel")));
+            }
+        }
+        return saleroom;
     }
 }

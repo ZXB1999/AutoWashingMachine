@@ -12,7 +12,9 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class OrderController {
@@ -66,5 +68,23 @@ public class OrderController {
     @GetMapping("/countorder")
     public int countorder(){
         return orderService.countorder();
+    }
+
+    @ApiOperation("统计订单-->小时(ADMIN)")
+    @GetMapping("/statisticalhour")
+    public Map<String,Integer> statisticalhour(){
+        return orderService.statisticalhour();
+    }
+
+    @ApiOperation("统计订单-->星期(ADMIN)")
+    @GetMapping("/statisticalweek")
+    public Map<String,Integer> statisticalweek(){
+        return orderService.statisticalweek();
+    }
+
+    @ApiOperation("统计订单-->星期销售额(ADMIN)")
+    @GetMapping("/statisticalsaleroom")
+    public Map<String, BigDecimal> statisticalsaleroom(){
+        return orderService.statisticalsaleroom();
     }
 }

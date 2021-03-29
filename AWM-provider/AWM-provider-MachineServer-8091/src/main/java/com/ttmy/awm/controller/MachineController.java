@@ -11,14 +11,17 @@ import com.ttmy.awm.constant.OrderState;
 import com.ttmy.awm.service.MachineService;
 import com.ttmy.awm.service.MachineTaskService;
 import com.ttmy.awm.service.QRcodeService;
+import com.ttmy.awm.service.WashingContextService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class MachineController {
@@ -36,6 +39,9 @@ public class MachineController {
 
     @Autowired
     private QRcodeService qRcodeService;
+
+    @Autowired
+    private WashingContextService washingContextService;
 
     @ApiOperation("查询所有机器")
     @GetMapping("/queryAll/list")
@@ -114,5 +120,11 @@ public class MachineController {
     @PostMapping("/PseudodeleteMachine/{machineID}")
     public int PseudodeleteMachine(@PathVariable("machineID") String machineID) {
         return machineService.PseudodeleteMachine(machineID);
+    }
+
+    @ApiOperation("获取服务单价表(ADMIN)")
+    @GetMapping("/servercost")
+    public Map<String, BigDecimal> servercost() {
+        return washingContextService.servercost();
     }
 }

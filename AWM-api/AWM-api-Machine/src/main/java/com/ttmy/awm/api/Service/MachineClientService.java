@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 @Component
 @FeignClient(value = "AWM-PROVIDER-MACHINESERVER-8091",fallbackFactory = MachineClientServiceFallBackFactory.class)
@@ -23,4 +25,7 @@ public interface MachineClientService {
 
     @PostMapping("/UpdateState")
     int updatestatus(@RequestBody Washingserver newstate);
+
+    @GetMapping("/servercost")
+    public Map<String, BigDecimal> servercost();
 }
