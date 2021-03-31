@@ -12,11 +12,12 @@ import com.ttmy.awm.dao.MachineMapper;
 import com.ttmy.awm.dao.MachineStateMapper;
 import com.ttmy.awm.dao.WashingServerMapper;
 import com.ttmy.awm.service.MachineService;
+import com.ttmy.awm.service.QRcodeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import java.util.*;
 
 @Service
 @Transactional
@@ -29,6 +30,9 @@ public class MachineServiceImpl implements MachineService {
 
     @Autowired
     private WashingServerMapper washingServerMapper;
+
+    @Autowired
+    private QRcodeService qRcodeService;
 
     /**
      * 查询所有机器
@@ -149,8 +153,30 @@ public class MachineServiceImpl implements MachineService {
     public int PseudodeleteMachine(String MachineId) {
         Washingmachine Pseudodelete = new Washingmachine();
         Pseudodelete.setMachineId(MachineId);
+        Pseudodelete.setUpdateTime(new Date());
         Pseudodelete.setDelflag(BaceConst.DELFLAG_UNUSEFUL);
         return machineMapper.updateById(Pseudodelete);
+    }
+
+    public List<Map<String,Object>> machinerecyclebin() throws Exception {
+        List<Map<String,Object>> returnlist = new ArrayList<Map<String,Object>>();
+        QueryWrapper<Washingmachine> wrapper = new QueryWrapper();
+        wrapper.in("delflag",BaceConst.DELFLAG_UNUSEFUL);
+        List<Washingmachine> washingmachines = machineMapper.selectList(wrapper);
+        for (Washingmachine machine: washingmachines) {
+            Map<String,Object> map = new HashMap<String, Object>();
+            map.put("machine_id",machine.getMachineId());
+            map.put("brand",machine.getBrand());
+            map.put("model",machine.getModel());
+            map.put("type",machine.getType());
+            map.put("create_time",machine.getCreateTime());
+            map.put("update_time",machine.getUpdateTime());
+            map.put("longitude",machine.getLongitude());
+            map.put("latitude",machine.getLatitude());
+            map.put("brob",qRcodeService.QRcode(machine.getMachineId()));
+            returnlist.add(map);
+        }
+        return returnlist;
     }
 
 }

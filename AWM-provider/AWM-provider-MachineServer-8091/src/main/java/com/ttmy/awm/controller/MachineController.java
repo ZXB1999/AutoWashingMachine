@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -126,5 +127,30 @@ public class MachineController {
     @GetMapping("/servercost")
     public Map<String, BigDecimal> servercost() {
         return washingContextService.servercost();
+    }
+
+    @ApiOperation("获取地理位置信息(ADMIN)")
+    @GetMapping("/position")
+    public List<Map<String,Object>> position() {
+        List<Map<String,Object>> returnlist =new ArrayList<Map<String, Object>>();
+        List<Washingmachine> washingmachines = machineService.queryAll();
+        for (Washingmachine machine: washingmachines) {
+            List<BigDecimal> values = new ArrayList<BigDecimal>();
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("name", machine.getBrand());
+            List<MachineStateVo> machineStateVos = machineService.queryMachineState(machine.getMachineId());
+            map.put("state",machineStateVos.get(0).getState());
+            values.add(machine.getLongitude());
+            values.add(machine.getLatitude());
+            map.put("value", values);
+            returnlist.add(map);
+        }
+        return returnlist;
+    }
+
+    @ApiOperation("设备回收站(ADMIN)")
+    @GetMapping("/machinerecyclebin")
+    public List<Map<String,Object>> machinerecyclebin() throws Exception {
+        return machineService.machinerecyclebin();
     }
 }

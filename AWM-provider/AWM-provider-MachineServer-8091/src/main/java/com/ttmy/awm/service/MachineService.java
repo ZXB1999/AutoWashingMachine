@@ -7,6 +7,7 @@ import com.ttmy.awm.api.pojo.Washingserver;
 import com.ttmy.awm.api.pojo.vo.MachineStateVo;
 
 import java.util.List;
+import java.util.Map;
 
 public interface MachineService {
 
@@ -27,4 +28,6 @@ public interface MachineService {
     List<Washingmachine> queryMachine(String MachineId,String Brand,Integer current, Integer size);
 
     int PseudodeleteMachine(String MachineId);
+
+    List<Map<String,Object>> machinerecyclebin() throws Exception;
 }
