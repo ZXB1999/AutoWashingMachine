@@ -153,4 +153,10 @@ public class MachineController {
     public List<Map<String,Object>> machinerecyclebin() throws Exception {
         return machineService.machinerecyclebin();
     }
+
+    @ApiOperation("批量伪删除(ADMIN)")
+    @PostMapping("/PseudodeletelistMachine")
+    public int PseudodeletelistMachine(@RequestBody List<Washingmachine> washingmachines) {
+        return machineService.PseudodeletelistMachine(washingmachines);
+    }
 }

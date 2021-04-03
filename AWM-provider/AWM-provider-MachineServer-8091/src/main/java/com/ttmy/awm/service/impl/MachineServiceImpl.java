@@ -179,4 +179,17 @@ public class MachineServiceImpl implements MachineService {
         return returnlist;
     }
 
+    public int PseudodeletelistMachine(List<Washingmachine> washingmachines) {
+        int flag =0;
+        for (Washingmachine washingmachine: washingmachines) {
+            QueryWrapper<Washingmachine> wrapper = new QueryWrapper();
+            wrapper.in("machine_id",washingmachine.getMachineId());
+            washingmachine.setUpdateTime(new Date());
+            washingmachine.setDelflag(BaceConst.DELFLAG_UNUSEFUL);
+            machineMapper.update(washingmachine,wrapper);
+            flag++;
+        }
+        return flag;
+    }
+
 }
