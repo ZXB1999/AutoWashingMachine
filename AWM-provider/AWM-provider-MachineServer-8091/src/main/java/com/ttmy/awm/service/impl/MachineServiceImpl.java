@@ -129,6 +129,7 @@ public class MachineServiceImpl implements MachineService {
      */
     public List<Washingmachine> queryMachine(String MachineId, String Brand, Integer current, Integer size) {
         QueryWrapper<Washingmachine> wrapper = new QueryWrapper();
+        wrapper.in("delflag",BaceConst.DELFLAG_USEFUL);
         MachinePageVo machinePageVo = new MachinePageVo();
         IPage<Washingmachine> page = new Page<Washingmachine>(current, size);
         if (MachineId!=null&&MachineId!=""){
@@ -190,6 +191,24 @@ public class MachineServiceImpl implements MachineService {
             flag++;
         }
         return flag;
+    }
+
+    /**
+     * 查询出来的总条数 用作分页
+     * @param MachineId
+     * @param Brand
+     * @return
+     */
+    public int queryMachinesize(String MachineId, String Brand) {
+        QueryWrapper<Washingmachine> wrapper = new QueryWrapper();
+        wrapper.in("delflag",BaceConst.DELFLAG_USEFUL);
+        if (MachineId!=null&&MachineId!=""){
+            wrapper.in("machine_id",MachineId);
+        }
+        if (Brand!=null&&Brand!=""){
+            wrapper.in("brand",Brand);
+        }
+        return machineMapper.selectCount(wrapper);
     }
 
 }

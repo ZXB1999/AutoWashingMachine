@@ -32,4 +32,6 @@ public interface MachineService {
     List<Map<String,Object>> machinerecyclebin() throws Exception;
 
     int PseudodeletelistMachine(List<Washingmachine> washingmachines);
+
+    int queryMachinesize(String MachineId,String Brand);
 }

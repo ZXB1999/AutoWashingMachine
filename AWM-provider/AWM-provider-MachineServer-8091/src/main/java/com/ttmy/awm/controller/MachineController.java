@@ -159,4 +159,10 @@ public class MachineController {
     public int PseudodeletelistMachine(@RequestBody List<Washingmachine> washingmachines) {
         return machineService.PseudodeletelistMachine(washingmachines);
     }
+
+    @ApiOperation("多条件查询某一设备总条数(ADMIN)")
+    @PostMapping("/queryMachinesize")
+    public int queryMachinesize(@RequestBody Washingmachine newMachine) {
+        return machineService.queryMachinesize(newMachine.getMachineId(),newMachine.getBrand());
+    }
 }
