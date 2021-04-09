@@ -4,8 +4,11 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.ttmy.awm.api.Service.MachineClientService;
+import com.ttmy.awm.api.Service.UserClientService;
 import com.ttmy.awm.api.pojo.Awmorder;
+import com.ttmy.awm.api.pojo.Awmuser;
 import com.ttmy.awm.api.pojo.vo.OrderPageVo;
+import com.ttmy.awm.api.pojo.vo.UserPageVo;
 import com.ttmy.awm.constant.BaceConst;
 import com.ttmy.awm.dao.OrderMapper;
 import com.ttmy.awm.service.OrderService;
@@ -27,6 +30,9 @@ public class OrderserviceImpl implements OrderService {
 
     @Autowired
     private MachineClientService machineClientService;
+
+    @Autowired
+    private UserClientService userClientService;
 
     /**
      * 创建订单
@@ -93,7 +99,9 @@ public class OrderserviceImpl implements OrderService {
     }
 
     public int countorder() {
-        return orderMapper.selectCount(null);
+        QueryWrapper<Awmorder> wrapper = new QueryWrapper();
+        wrapper.in("delflag", BaceConst.DELFLAG_USEFUL);
+        return orderMapper.selectCount(wrapper);
     }
 
     /**
@@ -156,5 +164,79 @@ public class OrderserviceImpl implements OrderService {
             }
         }
         return saleroom;
+    }
+
+    @Override
+    public int PseudodeletelistOrder(List<Awmorder> orders) {
+        int flag=0;
+        for (Awmorder awmorder: orders) {
+            QueryWrapper<Awmorder> wrapper = new QueryWrapper();
+            wrapper.in("order_id",awmorder.getOrderId());
+            awmorder.setDelflag(BaceConst.DELFLAG_UNUSEFUL);
+            orderMapper.update(awmorder,wrapper);
+            flag++;
+        }
+        return flag;
+    }
+
+    /**
+     * 多条件查询订单
+     * @param current
+     * @param size
+     * @return
+     */
+    @Override
+    public List<Awmorder> MulticonditionalqueryOrder(Map<String,Object> map,Integer current, Integer size) {
+        OrderPageVo orderPageVo = new OrderPageVo();
+        IPage<Awmorder> page = new Page<Awmorder>(current, size);
+        QueryWrapper<Awmorder> wrapper = new QueryWrapper();
+        wrapper.in("delflag",BaceConst.DELFLAG_USEFUL);
+        if(map.containsKey("awmusername")){
+            wrapper.in("customer_id",userClientService.queryUserById((String) map.get("awmusername")).getAwmuserId());
+        }
+        if(map.containsKey("machineId")){
+            wrapper.in("machine_id",map.get("machineId"));
+        }
+        if(map.containsKey("begin")&&map.containsKey("end")){
+            wrapper.between("create_time",map.get("begin"),map.get("end"));
+        }
+        orderMapper.selectPage(page, wrapper);
+        orderPageVo.setCurrent(current);
+        orderPageVo.setSize(size);
+        orderPageVo.setTotal(page.getTotal());
+        orderPageVo.setAwmorderList(page.getRecords());
+        return orderPageVo.getAwmorderList();
+    }
+
+    /**
+     * 统计条数（条件查询）
+     * @param map
+     * @return
+     */
+    @Override
+    public int countMulticonditionalqueryOrder(Map<String, Object> map) {
+        QueryWrapper<Awmorder> wrapper = new QueryWrapper();
+        wrapper.in("delflag",BaceConst.DELFLAG_USEFUL);
+        if(map.containsKey("awmusername")){
+            wrapper.in("customer_id",userClientService.queryUserById((String) map.get("awmusername")).getAwmuserId());
+        }
+        if(map.containsKey("machineId")){
+            wrapper.in("machine_id",map.get("machineId"));
+        }
+        if(map.containsKey("begin")&&map.containsKey("end")){
+            wrapper.between("create_time",map.get("begin"),map.get("end"));
+        }
+        return orderMapper.selectCount(wrapper);
+    }
+
+    /**
+     * 订单回收站
+     * @return
+     */
+    @Override
+    public List<Awmorder> Orderdustbin() {
+        QueryWrapper<Awmorder> wrapper = new QueryWrapper();
+        wrapper.in("delflag",BaceConst.DELFLAG_UNUSEFUL);
+        return orderMapper.selectList(wrapper);
     }
 }

@@ -87,4 +87,28 @@ public class OrderController {
     public Map<String, BigDecimal> statisticalsaleroom(){
         return orderService.statisticalsaleroom();
     }
+
+    @ApiOperation("伪删除订单(ADMIN)")
+    @PutMapping("/PseudodeletelistOrder")
+    public int PseudodeletelistOrder(@RequestBody List<Awmorder> awmorders){
+        return orderService.PseudodeletelistOrder(awmorders);
+    }
+
+    @ApiOperation("多条件查询订单(ADMIN)")
+    @PostMapping("/MulticonditionalqueryOrder/{current}/{size}")
+    public List<Awmorder> MulticonditionalqueryOrder(@RequestBody Map<String,Object> map,@PathVariable("current") int current,@PathVariable("size") int size){
+        return orderService.MulticonditionalqueryOrder(map,current,size);
+    }
+
+    @ApiOperation("多条件查询订单条数(ADMIN)")
+    @PostMapping("/CountMulticonditionalqueryOrder")
+    public int CountMulticonditionalqueryOrder(@RequestBody Map<String,Object> map){
+        return orderService.countMulticonditionalqueryOrder(map);
+    }
+
+    @ApiOperation("订单回收站(ADMIN)")
+    @GetMapping("/Orderdustbin")
+    public List<Awmorder> Orderdustbin(){
+        return orderService.Orderdustbin();
+    }
 }
