@@ -165,4 +165,10 @@ public class MachineController {
     public int queryMachinesize(@RequestBody Washingmachine newMachine) {
         return machineService.queryMachinesize(newMachine.getMachineId(),newMachine.getBrand());
     }
+
+    @ApiOperation("更新设备信息(ADMIN)")
+    @PostMapping("/commituptmachine")
+    public void commituptmachine(@RequestBody Washingmachine uptMachine) {
+        machineService.commituptmachine(uptMachine);
+    }
 }

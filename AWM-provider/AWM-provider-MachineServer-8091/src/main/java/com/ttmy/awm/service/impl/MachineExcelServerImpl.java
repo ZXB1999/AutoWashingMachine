@@ -23,21 +23,32 @@ public class MachineExcelServerImpl implements MachineExcelServer {
     public void ImportExcel() {
     }
 
-    public List<MachineExcelEc> ExportExcel() {
-        List<Washingmachine> washingmachines = machineMapper.selectList(null);
+    public List<MachineExcelEc> ExportExcel(List<String> machineIds) {
         List<MachineExcelEc> list = new ArrayList<MachineExcelEc>();
-        for (Washingmachine washingmachine:washingmachines) {
-            MachineExcelEc data = new MachineExcelEc();
-            data.setBrand(washingmachine.getBrand());
-            data.setModel(washingmachine.getModel());
-            data.setType(washingmachine.getType());
-            data.setLongitude(washingmachine.getLongitude());
-            data.setLatitude(washingmachine.getLatitude());
-            list.add(data);
+        if(machineIds.get(0).equals("all")){
+            List<Washingmachine> washingmachines = machineMapper.selectList(null);
+            for (Washingmachine washingmachine:washingmachines) {
+                MachineExcelEc data = new MachineExcelEc();
+                data.setBrand(washingmachine.getBrand());
+                data.setModel(washingmachine.getModel());
+                data.setType(washingmachine.getType());
+                data.setLongitude(washingmachine.getLongitude());
+                data.setLatitude(washingmachine.getLatitude());
+                list.add(data);
+            }
+        }else {
+            for (String machineid: machineIds) {
+                Washingmachine washingmachine = machineMapper.selectById(machineid);
+                MachineExcelEc data = new MachineExcelEc();
+                data.setBrand(washingmachine.getBrand());
+                data.setModel(washingmachine.getModel());
+                data.setType(washingmachine.getType());
+                data.setLongitude(washingmachine.getLongitude());
+                data.setLatitude(washingmachine.getLatitude());
+                list.add(data);
+            }
         }
         return list;
-//        String fileName =PATH+ new Date().getTime()+".xlsx";
-//        EasyExcel.write(fileName, MachineExcelEc.class).sheet("设备").doWrite(list);
     }
 
 }

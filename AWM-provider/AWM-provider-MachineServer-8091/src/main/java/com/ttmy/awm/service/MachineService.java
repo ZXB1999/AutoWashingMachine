@@ -34,4 +34,6 @@ public interface MachineService {
     int PseudodeletelistMachine(List<Washingmachine> washingmachines);
 
     int queryMachinesize(String MachineId,String Brand);
+
+    void commituptmachine(Washingmachine uptmachine);
 }

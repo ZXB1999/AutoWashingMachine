@@ -7,5 +7,5 @@ import java.util.List;
 public interface MachineExcelServer {
     void ImportExcel();
 
-    List<MachineExcelEc> ExportExcel();
+    List<MachineExcelEc> ExportExcel(List<String> machineIds);
 }

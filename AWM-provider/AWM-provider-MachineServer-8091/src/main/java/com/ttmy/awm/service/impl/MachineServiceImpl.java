@@ -211,4 +211,14 @@ public class MachineServiceImpl implements MachineService {
         return machineMapper.selectCount(wrapper);
     }
 
+    /**
+     * 更新设备接口
+     * @param uptmachine
+     */
+    public void commituptmachine(Washingmachine uptmachine) {
+        QueryWrapper<Washingmachine> wrapper = new QueryWrapper();
+        wrapper.in("machine_id",uptmachine.getMachineId());
+        uptmachine.setUpdateTime(new Date());
+        machineMapper.update(uptmachine,wrapper);
+    }
 }
