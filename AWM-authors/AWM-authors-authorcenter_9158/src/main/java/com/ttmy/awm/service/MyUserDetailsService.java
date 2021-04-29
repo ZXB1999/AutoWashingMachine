@@ -17,7 +17,14 @@ public class MyUserDetailsService implements UserDetailsService {
          * 这个方法要依据用户名到库里查密码，把用户名密码对象返回，再有别的方法比对两个密码
          */
         Awmuser user = loginService.qutyByname(username);
-        UserDetails userDetails = User.withUsername(user.getAwmusername()).password(user.getPassword()).authorities("1").build();
+        UserDetails userDetails;
+        if(user.getAwmusername().equals("admin")){
+            userDetails = User.withUsername(user.getAwmusername()).password(user.getPassword()).authorities("ADMIN").build();
+//            System.out.println("管理员登陆了");
+        }else {
+            userDetails = User.withUsername(user.getAwmusername()).password(user.getPassword()).authorities("USER").build();
+//            System.out.println("用户登陆了");
+        }
         return userDetails;
     }
 }

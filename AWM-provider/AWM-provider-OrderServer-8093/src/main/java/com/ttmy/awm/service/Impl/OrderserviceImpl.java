@@ -63,6 +63,7 @@ public class OrderserviceImpl implements OrderService {
      */
     public List<Awmorder> historyorder(String customerid) {
         QueryWrapper<Awmorder> wrapper = new QueryWrapper();
+        wrapper.orderByDesc("create_time");
         wrapper.in("order_state",OrderState.FINISH_ORDER);
         wrapper.in("customer_id",customerid);
         return orderMapper.selectList(wrapper);

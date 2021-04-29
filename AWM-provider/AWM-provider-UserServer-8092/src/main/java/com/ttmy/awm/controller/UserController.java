@@ -1,6 +1,8 @@
 package com.ttmy.awm.controller;
 
 import com.ttmy.awm.api.pojo.Awmuser;
+import com.ttmy.awm.api.pojo.Usermsg;
+import com.ttmy.awm.service.MsgService;
 import com.ttmy.awm.service.UserService;
 import com.ttmy.awm.constant.LoginMsg;
 import io.swagger.annotations.ApiOperation;
