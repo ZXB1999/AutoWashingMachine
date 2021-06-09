@@ -21,6 +21,7 @@
         <module>AWM-api-common</module>
         <module>AWM-api-constant</module>
         <module>AWM-api-Order</module>
+        <module>AWM-api-Bank</module>
     </modules>
 
 </project>

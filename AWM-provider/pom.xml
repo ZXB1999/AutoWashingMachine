@@ -21,5 +21,6 @@
         <module>AWM-provider-common</module>
         <module>AWM-provider-common-security</module>
         <module>AWM-provider-OrderServer-8093</module>
+        <module>AWM-provider-BankServer-8094</module>
     </modules>
 </project>

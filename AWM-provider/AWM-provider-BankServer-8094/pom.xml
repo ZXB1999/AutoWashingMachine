@@ -9,15 +9,10 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>AWM-provider-UserServer-8092</artifactId>
+    <artifactId>AWM-provider-BankServer-8094</artifactId>
     <packaging>jar</packaging>
 
     <dependencies>
-        <dependency>
-            <groupId>com.ttmy</groupId>
-            <artifactId>AWM-api-User</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
         <dependency>
             <groupId>com.ttmy</groupId>
             <artifactId>AWM-api-Bank</artifactId>
@@ -25,7 +20,7 @@
         </dependency>
         <dependency>
             <groupId>com.ttmy</groupId>
-            <artifactId>AWM-api-constant</artifactId>
+            <artifactId>AWM-api-User</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
@@ -40,7 +35,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.ttmy.awm.UserProvider_8092</mainClass>
+                    <mainClass>com.ttmy.awm.BankProvider_8094</mainClass>
                 </configuration>
                 <executions>
                     <execution>
@@ -52,5 +47,6 @@
             </plugin>
         </plugins>
     </build>
+
 
 </project>

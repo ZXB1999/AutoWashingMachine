@@ -42,6 +42,9 @@ zuul:
     AWMOrderServer:
       path: /PROVIDERORDER/**
       serviceId: AWM-PROVIDER-ORDERSERVER-8093
+    AWMBankServer:
+      path: /PROVIDERBANK/**
+      serviceId: AWM-PROVIDER-BANKSERVER-8094
 ribbon:
   ReadTimeout: 3000
   ConnectTimeout: 3000
